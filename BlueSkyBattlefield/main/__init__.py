@@ -18,19 +18,51 @@ IMAGE_DIR = "imx"
 # Clases--------------------------------------------------------------
 
 class Nave(pygame.sprite.Sprite):
-        
-    def __init__(self, screen, filename, widthScale, heightScale):        
-        print("Se instancia una nueva imagen")
+    
+    #screen y filename son la pantalla y la ruta del archivo que le pasamos al metodo loadImage
+    #widthScale, heightScale son el reescalado del sprite , posicionX, posicionY son el lugar de la pantalla
+    #en que queremos que se pinte el sprite
+    def __init__(self, screen, filename, widthScale, heightScale, posicionX, posicionY):        
         self.image = load_image(screen, filename, True)
         self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
         
-    def getImage(self):
-        return self.image
-    
-    def getScaledImage(self):
-        return self.scaledImage
+        #posiciones en pantalla y tamano del objeto
+        self.posicionX = posicionX
+        self.posicionY = posicionY
+        self.width = widthScale
+        self.height = heightScale
         
+    def pintar(self):
+        screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
+        
+    def moverX(self, unidades):       
+        nuevaPosicion = self.posicionX + unidades
+        if nuevaPosicion > -2 and nuevaPosicion < SCREEN_WIDTH - 21:
+            self.posicionX = self.posicionX + unidades
 
+    def moverY(self, unidades):
+        self.posicionY = self.posicionX + unidades
+        self.posicionY
+
+    
+class NaveHeroe(Nave):
+    
+    velocidadMovimiento = 15
+    
+    def disparar(self):
+        print 'disparo'
+        
+    def moverIzquierda(self):
+        self.moverX(-self.velocidadMovimiento)
+    
+    def moverDerecha(self):
+        self.moverX(self.velocidadMovimiento)
+
+class NaveEnemiga(Nave):
+    
+    def atacar(self):
+        print 'ataca al heroe'
+    
 # ---------------------------------------------------------------------
 
 # Funciones------------------------------------------------------------
@@ -59,20 +91,26 @@ def bucleDeEjecucion():
     salir = False    
     reloj = pygame.time.Clock();
     while salir != True:
+        for evento in pygame.event.get():
+            if evento.type == QUIT:
+                salir = True        
+        
         #set images position
         screen.blit(background_image, (0, 0))
-        screen.blit(naveHeroe.getScaledImage(), ((SCREEN_WIDTH / 2) - 20, SCREEN_HEIGHT - 65))
+        #screen.blit(naveHeroe.scaledImage, ((SCREEN_WIDTH / 2) - 20, SCREEN_HEIGHT - 65))
+        naveHeroe.pintar()
+                
+        #movimiento de la nave del heroe
+        keys=pygame.key.get_pressed()   
+        if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
+            naveHeroe.moverIzquierda()
+        if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
+            naveHeroe.moverDerecha()
         
-        for evento in pygame.event.get():
-            #movimiento de la nave
-            if evento.type == pygame.K_LEFT:
-                print "move left"
-            if evento.type == pygame.K_RIGHT:
-                print "move right"
-            if evento.type == QUIT:
-                salir = True
+        #establecer velocidad de reloj y actualizar el display
         reloj.tick(25)
         pygame.display.flip()
+        
     pygame.quit()
 #--------------------------------------------------------------------------
 
@@ -80,14 +118,15 @@ def bucleDeEjecucion():
 if __name__ == '__main__':
     pygame.init()
     
+    #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), FULLSCREEN, 32)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.display.set_caption("Blue Space Battlefield")
-
+    pygame.mouse.set_visible(False)
     #load images
     background_image = load_image(screen, 'stars_blue.png')
     
     #creacion de objetos nave del protagonista
-    naveHeroe = Nave(screen, 'spaceShip_40.png', 25, 35)
+    naveHeroe = NaveHeroe(screen, 'spaceShip_40.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
 
     bucleDeEjecucion()
 
