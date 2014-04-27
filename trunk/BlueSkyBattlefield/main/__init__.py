@@ -6,7 +6,10 @@ import pygame
 from pygame.locals import*
 import sys
 import os
-from main.__test__ import Nave
+
+from main.__utils__ import  Utils
+from main.__components__ import *
+from unittest.test.test_result import __init__
 
 
 # Constantes
@@ -14,74 +17,6 @@ SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 IMAGE_DIR = "imx"
 
-
-# Clases--------------------------------------------------------------
-
-class Nave(pygame.sprite.Sprite):
-    
-    #screen y filename son la pantalla y la ruta del archivo que le pasamos al metodo loadImage
-    #widthScale, heightScale son el reescalado del sprite , posicionX, posicionY son el lugar de la pantalla
-    #en que queremos que se pinte el sprite
-    def __init__(self, screen, filename, widthScale, heightScale, posicionX, posicionY):        
-        self.image = load_image(screen, filename, True)
-        self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
-        
-        #posiciones en pantalla y tamano del objeto
-        self.posicionX = posicionX
-        self.posicionY = posicionY
-        self.width = widthScale
-        self.height = heightScale
-        
-    def pintar(self):
-        screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
-        
-    def moverX(self, unidades):       
-        nuevaPosicion = self.posicionX + unidades
-        if nuevaPosicion > -2 and nuevaPosicion < SCREEN_WIDTH - 21:
-            self.posicionX = self.posicionX + unidades
-
-    def moverY(self, unidades):
-        self.posicionY = self.posicionX + unidades
-        self.posicionY
-
-    
-class NaveHeroe(Nave):
-    
-    velocidadMovimiento = 15
-    
-    def disparar(self):
-        print 'disparo'
-        
-    def moverIzquierda(self):
-        self.moverX(-self.velocidadMovimiento)
-    
-    def moverDerecha(self):
-        self.moverX(self.velocidadMovimiento)
-
-class NaveEnemiga(Nave):
-    
-    def atacar(self):
-        print 'ataca al heroe'
-    
-# ---------------------------------------------------------------------
-
-# Funciones------------------------------------------------------------
-
-def load_image(screen, filename, transparent=False):
-    # Encontramos la ruta completa de la imagen
-    ruta = os.path.join(IMAGE_DIR, filename)
-    print ruta
-    try:
-        image = pygame.image.load(ruta)
-    except pygame.error, message:
-        raise  SystemExit(message)
-
-    if transparent:
-        image = image.convert_alpha()
-    else:
-        image = image.convert()
-
-    return image
 
 #Ejecucion del juego--------------------------------------------------------------------------
 
@@ -106,7 +41,9 @@ def bucleDeEjecucion():
             naveHeroe.moverIzquierda()
         if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
             naveHeroe.moverDerecha()
-        
+        if(keys[pygame.K_SPACE]):
+            naveHeroe.disparar()
+            
         #establecer velocidad de reloj y actualizar el display
         reloj.tick(25)
         pygame.display.flip()
@@ -123,11 +60,11 @@ if __name__ == '__main__':
     pygame.display.set_caption("Blue Space Battlefield")
     pygame.mouse.set_visible(False)
     #load images
-    background_image = load_image(screen, 'stars_blue.png')
+    background_image = Utils.load_image(screen, IMAGE_DIR, 'stars_blue.png')
     
     #creacion de objetos nave del protagonista
-    naveHeroe = NaveHeroe(screen, 'spaceShip_40.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
-
+    naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
+    
     bucleDeEjecucion()
 
 
