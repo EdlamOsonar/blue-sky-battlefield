@@ -43,7 +43,10 @@ def bucleDeEjecucion():
             naveHeroe.moverDerecha()
         if(keys[pygame.K_SPACE]):
             naveHeroe.disparar()
-            
+        
+        if naveHeroe.disparando == True:
+            naveHeroe.updateDisparos()
+        
         #establecer velocidad de reloj y actualizar el display
         reloj.tick(25)
         pygame.display.flip()
@@ -63,7 +66,7 @@ if __name__ == '__main__':
     background_image = Utils.load_image(screen, IMAGE_DIR, 'stars_blue.png')
     
     #creacion de objetos nave del protagonista
-    naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
+    naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
     
     bucleDeEjecucion()
 
