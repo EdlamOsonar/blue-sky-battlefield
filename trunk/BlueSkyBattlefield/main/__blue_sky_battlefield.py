@@ -81,47 +81,52 @@ class NaveHeroe(Nave):
     velocidadMovimiento = 15
     
     def postConstructor(self):
-        self.numeroDisparos =0
-        
-        #crear aray de disparos
-        self.disparos = [Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
+       
+        #crear aray de arrayDisparos
+        self.arrayDisparos = [Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
+                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
+                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
+                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
+                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
                              Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5)]
-         
+        
+        self.disparosDisponibles = len(self.arrayDisparos) -1
+    
     def moverIzquierda(self):
         self.moverX(-self.velocidadMovimiento)
     
     def moverDerecha(self):
         self.moverX(self.velocidadMovimiento)
         
-    def disparar(self):        
-        if self.numeroDisparos < len(self.disparos):
-            disparo = self.disparos[self.numeroDisparos]
-            if disparo.enabled == False:                        
-                disparo.pintar(self.posicionX , self.posicionY)     
-                disparo.enabled = True           
-                self.numeroDisparos = self.numeroDisparos + 1           
-        
+    def disparar(self):
+         
+        if self.disparosDisponibles >= 0:            
+            if self.arrayDisparos[self.disparosDisponibles].enabled == False:                        
+                self.arrayDisparos[self.disparosDisponibles].pintar(self.posicionX , self.posicionY)     
+                self.arrayDisparos[self.disparosDisponibles].enabled = True           
+        else:
+            self.disparosDisponibles = len(self.arrayDisparos) -1
+          
+        self.disparosDisponibles = self.disparosDisponibles - 1        
             
     def updateDisparos(self):
-        for i in xrange(self.numeroDisparos):
-            self.disparos[i].update()
-            
-            #comprobar si los disparos ya no estan en pantalla para disminuir el contao de disparos (solo puede haber self.numeroDisparos en pantalla)
-            if self.disparos[i].posicionY < 0 and self.disparos[i].enabled == True:                
-                self.disparos[i].posicionX = self.posicionX
-                self.disparos[i].posicionY = self.posicionY
-                self.numeroDisparos = self.numeroDisparos - 1
-                self.disparos[i].enabled = False
-                print("disparo -> " + str(i) + " posicion en pantalla en el eje y " + str(self.disparos[i].posicionY))
+        for i in xrange(len(self.arrayDisparos) -1):
+            self.arrayDisparos[i].update() 
+                        
+            #comprobar si los arrayDisparos ya no estan en pantalla para disminuir el contao de arrayDisparos (solo puede haber self.disparosDisponibles en pantalla)
+            if self.arrayDisparos[i].posicionY < 0 and self.arrayDisparos[i].enabled == True:                
+                self.arrayDisparos[i].posicionX = self.posicionX
+                self.arrayDisparos[i].posicionY = self.posicionY
+                self.disparosDisponibles = self.disparosDisponibles + 1
+                self.arrayDisparos[i].enabled = False
+            print("disparo -> " + str(i) + " posicion en pantalla en el eje y " + str(self.arrayDisparos[i].posicionY) + " enabled = " + str(self.arrayDisparos[i].enabled))
 
 class NaveEnemiga(Nave):
       
@@ -145,6 +150,7 @@ class Disparo(pygame.sprite.Sprite):
         self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
     
     def update(self):
+        print("disparo at update is enabled " + str(self.enabled))
         if self.enabled == True:
             self.posicionY = self.posicionY -10
             self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
