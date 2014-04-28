@@ -44,8 +44,7 @@ def bucleDeEjecucion():
         if(keys[pygame.K_SPACE]):
             naveHeroe.disparar()
         
-        if naveHeroe.disparando == True:
-            naveHeroe.updateDisparos()
+        naveHeroe.updateDisparos()
         
         #establecer velocidad de reloj y actualizar el display
         reloj.tick(25)
