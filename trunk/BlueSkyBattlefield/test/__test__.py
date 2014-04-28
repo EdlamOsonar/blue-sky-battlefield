@@ -13,7 +13,7 @@ from locale import str
 # Constantes
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
-IMAGE_DIR = "imx"
+IMAGE_DIR = "C:\Workspace\dev\BlueSkyBattlefield\main\imx"
 
 lstRects = []
 
