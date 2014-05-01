@@ -47,7 +47,7 @@ def bucleDeEjecucion():
         naveHeroe.updateDisparos()
         
         #establecer velocidad de reloj y actualizar el display
-        reloj.tick(25)
+        reloj.tick(30)
         pygame.display.flip()
         
     pygame.quit()

@@ -9,15 +9,9 @@ class NaveHeroe(Nave):
     
     velocidadMovimiento = 15
     
-    def postConstructor(self):
-       
+    def postConstructor(self):       
         #crear aray de arrayDisparos
         self.arrayDisparos = []
-        for i in range(NUMERO_DISPAROS):
-            print('se instancia el disparo numero ' + str(i))
-            self.arrayDisparos.append(Disparo(self.screen, self.image_dir, self.file_name_image_disparo, WIDTH_LASER, HEIGHT_LASER))
-        
-        self.disparosDisponibles = len(self.arrayDisparos) -1
     
     def moverIzquierda(self):
         self.moverX(-self.velocidadMovimiento)
@@ -26,22 +20,29 @@ class NaveHeroe(Nave):
         self.moverX(self.velocidadMovimiento)
         
     def disparar(self):
-         
-        if self.disparosDisponibles >= 0:            
-            print('disparar.disparos_disponibles ' + str(self.disparosDisponibles))
-            if self.arrayDisparos[self.disparosDisponibles].enabled == False:                        
-                self.arrayDisparos[self.disparosDisponibles].pintar(self.posicionX , self.posicionY)     
-                self.arrayDisparos[self.disparosDisponibles].enabled = True        
-                self.disparosDisponibles = self.disparosDisponibles -1        
-            
+        if(len(self.arrayDisparos) < NUMERO_DISPAROS):
+            disparo = Disparo(self.screen, self.image_dir, self.file_name_image_disparo, WIDTH_LASER, HEIGHT_LASER)
+            disparo.posicionX = self.posicionX + self.width / 2
+            disparo.posicionY = self.posicionY
+            self.arrayDisparos.append(disparo)                    
+        
     def updateDisparos(self):
-        for i in xrange(len(self.arrayDisparos) -1):
-            self.arrayDisparos[i].update() 
-                        
-            #comprobar si los arrayDisparos ya no estan en pantalla para disminuir el contao de arrayDisparos (solo puede haber self.disparosDisponibles en pantalla)
-            if self.arrayDisparos[i].posicionY < 0 and self.arrayDisparos[i].enabled == True:                
-                self.arrayDisparos[i].posicionX = self.posicionX
-                self.arrayDisparos[i].posicionY = self.posicionY
-                self.disparosDisponibles = self.disparosDisponibles + 1
-                self.arrayDisparos[i].enabled = False
-            #  print("disparo -> " + str(i) + " posicion en pantalla en el eje y " + str(self.arrayDisparos[i].posicionY) + " enabled = " + str(self.arrayDisparos[i].enabled))
+        disparosEliminar = []
+        
+        if self.arrayDisparos:
+            
+            numeroDisparos = len(self.arrayDisparos)
+            
+            for i in range(numeroDisparos):
+                disparo = self.arrayDisparos[i]
+                disparo.update() 
+                #comprobar si los arrayDisparos ya no estan en pantalla para eliminarlos
+                if disparo.posicionY <= 0:            
+                    disparosEliminar.append(i)
+            
+            #eliminar los disparos que no se muestran
+            for i in range(len(disparosEliminar)):                
+                self.arrayDisparos.pop(disparosEliminar[i])     
+               
+                       
+    
