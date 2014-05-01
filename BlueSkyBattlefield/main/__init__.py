@@ -2,20 +2,20 @@
 # -*- coding: utf-8 -*-
 
 # Imports de modulos
-import pygame
-from pygame.locals import*
-import sys
 import os
+import sys
 
-from main.__utils__ import  Utils
-from main.__components__ import *
-from unittest.test.test_result import __init__
+import pygame
 
+
+from pygame.locals import*
+from main.component.NaveHeroe import *
+from main.util.ImageUtil import ImageUtils
 
 # Constantes
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
-IMAGE_DIR = "imx"
+IMAGE_DIR = "../resources/imx"
 
 
 #Ejecucion del juego--------------------------------------------------------------------------
@@ -51,7 +51,6 @@ def bucleDeEjecucion():
         pygame.display.flip()
         
     pygame.quit()
-#--------------------------------------------------------------------------
 
 # Inicializacion(punto de entrada de la ejecucion del programa)---------------------------------------------------------------------
 if __name__ == '__main__':
@@ -62,7 +61,7 @@ if __name__ == '__main__':
     pygame.display.set_caption("Blue Space Battlefield")
     pygame.mouse.set_visible(False)
     #load images
-    background_image = Utils.load_image(screen, IMAGE_DIR, 'stars_blue.png')
+    background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')
     
     #creacion de objetos nave del protagonista
     naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))

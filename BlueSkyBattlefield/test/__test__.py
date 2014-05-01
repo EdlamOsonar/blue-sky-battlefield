@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 
 # Módulos
-import pygame
-import random
-from pygame.locals import*
-import sys
-import os
 from locale import str
+import os
+import random
+import sys
+
+import pygame
+
+
+from pygame.locals import*
 
 
 # Constantes

@@ -4,10 +4,11 @@ Created on 27/04/2014
 @author: Fernando
 '''
 import os
+
 import pygame
 
 
-class Utils():
+class ImageUtils():
     
     @staticmethod
     def load_image(screen, image_dir , filename, transparent=False):
