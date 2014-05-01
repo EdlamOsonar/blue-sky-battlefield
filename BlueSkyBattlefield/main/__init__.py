@@ -25,6 +25,7 @@ def bucleDeEjecucion():
     #Bucle principal del juego
     salir = False    
     reloj = pygame.time.Clock();
+    
     while salir != True:
         for evento in pygame.event.get():
             if evento.type == QUIT:
@@ -32,7 +33,6 @@ def bucleDeEjecucion():
         
         #set images position
         screen.blit(background_image, (0, 0))
-        #screen.blit(naveHeroe.scaledImage, ((SCREEN_WIDTH / 2) - 20, SCREEN_HEIGHT - 65))
         naveHeroe.pintar()
                 
         #movimiento de la nave del heroe
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     
     #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), FULLSCREEN, 32)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Blue Space Battlefield")
+    pygame.display.set_caption("Blue Sky Battlefield")
     pygame.mouse.set_visible(False)
     #load images
     background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')
@@ -66,6 +66,7 @@ if __name__ == '__main__':
     #creacion de objetos nave del protagonista
     naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
     
+    #bucle de ejecucion del juego
     bucleDeEjecucion()
 
 

@@ -1,6 +1,9 @@
 from main.component.Disparo import Disparo
 from main.component.Nave import Nave
 
+WIDTH_LASER = 3
+HEIGHT_LASER = 5
+NUMERO_DISPAROS = 25
 
 class NaveHeroe(Nave):
     
@@ -9,19 +12,10 @@ class NaveHeroe(Nave):
     def postConstructor(self):
        
         #crear aray de arrayDisparos
-        self.arrayDisparos = [Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5),
-                             Disparo(self.screen, self.image_dir, self.file_name_image_disparo, 3, 5)]
+        self.arrayDisparos = []
+        for i in range(NUMERO_DISPAROS):
+            print('se instancia el disparo numero ' + str(i))
+            self.arrayDisparos.append(Disparo(self.screen, self.image_dir, self.file_name_image_disparo, WIDTH_LASER, HEIGHT_LASER))
         
         self.disparosDisponibles = len(self.arrayDisparos) -1
     
@@ -34,13 +28,11 @@ class NaveHeroe(Nave):
     def disparar(self):
          
         if self.disparosDisponibles >= 0:            
+            print('disparar.disparos_disponibles ' + str(self.disparosDisponibles))
             if self.arrayDisparos[self.disparosDisponibles].enabled == False:                        
                 self.arrayDisparos[self.disparosDisponibles].pintar(self.posicionX , self.posicionY)     
-                self.arrayDisparos[self.disparosDisponibles].enabled = True           
-        else:
-            self.disparosDisponibles = len(self.arrayDisparos) -1
-          
-        self.disparosDisponibles = self.disparosDisponibles - 1        
+                self.arrayDisparos[self.disparosDisponibles].enabled = True        
+                self.disparosDisponibles = self.disparosDisponibles -1        
             
     def updateDisparos(self):
         for i in xrange(len(self.arrayDisparos) -1):
@@ -52,4 +44,4 @@ class NaveHeroe(Nave):
                 self.arrayDisparos[i].posicionY = self.posicionY
                 self.disparosDisponibles = self.disparosDisponibles + 1
                 self.arrayDisparos[i].enabled = False
-            print("disparo -> " + str(i) + " posicion en pantalla en el eje y " + str(self.arrayDisparos[i].posicionY) + " enabled = " + str(self.arrayDisparos[i].enabled))
+            #  print("disparo -> " + str(i) + " posicion en pantalla en el eje y " + str(self.arrayDisparos[i].posicionY) + " enabled = " + str(self.arrayDisparos[i].enabled))

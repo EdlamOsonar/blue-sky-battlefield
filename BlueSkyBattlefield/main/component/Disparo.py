@@ -19,7 +19,7 @@ class Disparo(pygame.sprite.Sprite):
         self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
     
     def update(self):
-        print("disparo at update is enabled " + str(self.enabled))
+        #print("disparo at update is enabled " + str(self.enabled))
         if self.enabled == True:
             self.posicionY = self.posicionY -10
             self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
