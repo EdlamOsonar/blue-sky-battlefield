@@ -11,11 +11,11 @@ class ColisionManager(object):
     def __init__(self):
         self.arrayObjetos = []
     
-        # anade un objeto al array de colisiones para ser mantenido por el ColissionManager
+    # anade un objeto al array de colisiones para ser mantenido por el ColissionManager
     def add(self, item):
             self.arrayObjetos.append(item)
     
-    
+    # elimina un objeto al array de colisiones para ser mantenido por el ColissionManager    
     def remove(self, objeto):
         if self.arrayObjetos:
             indexToRemove = -1
@@ -24,7 +24,8 @@ class ColisionManager(object):
                     indexToRemove = i
             if indexToRemove >= 0:
                 self.arrayObjetos.pop(indexToRemove)
-                    
+    
+    #comprueba si se ha producido colision entre dos sprites       
     def checkCollision(self, sprite1, sprite2):
         col = pygame.sprite.collide_rect(sprite1, sprite2)
         return col 
