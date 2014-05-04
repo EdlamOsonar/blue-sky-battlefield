@@ -13,6 +13,9 @@ class NaveHeroe(Nave):
         #crear aray de arrayDisparos
         self.arrayDisparos = []
     
+    def setColisionManager(self, colisionManager):
+        self.colisionManager = colisionManager
+    
     def moverIzquierda(self):
         self.moverX(-self.velocidadMovimiento)
     
@@ -25,13 +28,12 @@ class NaveHeroe(Nave):
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             self.arrayDisparos.append(disparo)                    
-        
-    def updateDisparos(self):
-        disparosEliminar = []
-        
-        if self.arrayDisparos:
+            self.colisionManager.add(disparo)
             
-            numeroDisparos = len(self.arrayDisparos)
+    def updateDisparos(self):
+        disparosEliminar = []                
+        if self.arrayDisparos:            
+            numeroDisparos = len(self.arrayDisparos)            
             
             for i in range(numeroDisparos):
                 disparo = self.arrayDisparos[i]
@@ -39,10 +41,12 @@ class NaveHeroe(Nave):
                 #comprobar si los arrayDisparos ya no estan en pantalla para eliminarlos
                 if disparo.posicionY <= 0:            
                     disparosEliminar.append(i)
-            
+                    #eliminar el disparo del colision manager
+                    self.colisionManager.remove(disparo)
+                    
             #eliminar los disparos que no se muestran
             for i in range(len(disparosEliminar)):                
                 self.arrayDisparos.pop(disparosEliminar[i])     
-               
-                       
     
+    def collision(self):
+        print 'colision de la nave del heroe'

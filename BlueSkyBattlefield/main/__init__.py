@@ -10,7 +10,10 @@ import pygame
 
 from pygame.locals import*
 from main.component.NaveHeroe import *
+from main.component.NaveEnemiga import *
 from main.util.ImageUtil import ImageUtils
+from main.manager.ColisionManager import ColisionManager
+
 
 # Constantes
 SCREEN_WIDTH = 640
@@ -34,7 +37,8 @@ def bucleDeEjecucion():
         #set images position
         screen.blit(background_image, (0, 0))
         naveHeroe.pintar()
-                
+        naveEnemiga.pintar()
+             
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
         if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
@@ -45,6 +49,21 @@ def bucleDeEjecucion():
             naveHeroe.disparar()
         
         naveHeroe.updateDisparos()
+        
+        colisionManager.execute()
+        #=======================================================================
+        # #detectar colisiones
+        # for i in range(10):
+        #     if(len(naveHeroe.arrayDisparos) >= i + 1):
+        #         disparo = naveHeroe.arrayDisparos[i]
+        #         #disparo.rect.y = 250
+        #         print(' disparo y ' + str(disparo.rect.y) + ' disparo x ' + str(disparo.rect.x))
+        #         print(' nave enemiga y ' + str(naveEnemiga.rect.y) + ' nave enemiga x ' + str(naveEnemiga.rect.x))
+        #         impactoAlEnemigo = naveEnemiga.rect.colliderect(disparo.rect)                
+        #         if impactoAlEnemigo:                    
+        #             naveEnemiga.impacto()
+        #=======================================================================
+                    #disparo.destruir()
         
         #establecer velocidad de reloj y actualizar el display
         reloj.tick(30)
@@ -61,10 +80,18 @@ if __name__ == '__main__':
     pygame.display.set_caption("Blue Sky Battlefield")
     pygame.mouse.set_visible(False)
     #load images
-    background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')
-    
+    background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')[0]
+
+    #managers
+    colisionManager = ColisionManager()
     #creacion de objetos nave del protagonista
     naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
+    naveHeroe.setColisionManager(colisionManager)
+    colisionManager.add(naveHeroe)
+    
+    #prueba nave enemiga
+    naveEnemiga = NaveEnemiga(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 400))
+    colisionManager.add(naveEnemiga)
     
     #bucle de ejecucion del juego
     bucleDeEjecucion()
