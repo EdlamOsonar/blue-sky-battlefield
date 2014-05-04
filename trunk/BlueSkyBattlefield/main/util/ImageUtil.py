@@ -25,4 +25,10 @@ class ImageUtils():
         else:
             image = image.convert()
     
-        return image
+        return image, image.get_rect()
+    
+    @staticmethod
+    def checkCollision(sprite1, sprite2):
+        col = pygame.sprite.collide_rect(sprite1, sprite2)
+        return col 
+            
