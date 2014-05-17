@@ -32,7 +32,7 @@ class Nave(SpriteExtended):
         pass
     
     def collision(self):
-        pass
+        self.vida = self.vida -1
     
     def pintar(self):
         self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))

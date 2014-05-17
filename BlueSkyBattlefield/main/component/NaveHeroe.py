@@ -1,5 +1,5 @@
-from main.component.Disparo import Disparo
 from main.component.Nave import Nave
+from main.component.DisparoHeroe import DisparoHeroe
 
 WIDTH_LASER = 3
 HEIGHT_LASER = 5
@@ -24,7 +24,7 @@ class NaveHeroe(Nave):
         
     def disparar(self):
         if(len(self.arrayDisparos) < NUMERO_DISPAROS):
-            disparo = Disparo(self.screen, self.image_dir, self.file_name_image_disparo, WIDTH_LASER, HEIGHT_LASER)
+            disparo = DisparoHeroe(self.screen, self.image_dir, self.file_name_image_disparo, WIDTH_LASER, HEIGHT_LASER)
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             self.arrayDisparos.append(disparo)                    
@@ -48,5 +48,5 @@ class NaveHeroe(Nave):
             for i in range(len(disparosEliminar)):                
                 self.arrayDisparos.pop(disparosEliminar[i])     
     
-    def collision(self):
+    def colision(self):
         print 'colision de la nave del heroe'
