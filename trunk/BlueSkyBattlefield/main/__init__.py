@@ -13,6 +13,7 @@ from main.component.NaveHeroe import *
 from main.component.NaveEnemiga import *
 from main.util.ImageUtil import ImageUtils
 from main.manager.ColisionManager import ColisionManager
+from main.manager.ComponentManager import ComponentManager
 
 
 # Constantes
@@ -50,7 +51,7 @@ def bucleDeEjecucion():
         
         naveHeroe.updateDisparos()
         
-        colisionManager.execute()
+        componentManager.colisionManager.execute()
         #=======================================================================
         # #detectar colisiones
         # for i in range(10):
@@ -83,15 +84,13 @@ if __name__ == '__main__':
     background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')[0]
 
     #managers
-    colisionManager = ColisionManager()
+    componentManager = ComponentManager()
+
     #creacion de objetos nave del protagonista
-    naveHeroe = NaveHeroe(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
-    naveHeroe.setColisionManager(colisionManager)
-    colisionManager.add(naveHeroe)
+    naveHeroe = componentManager.createNaveHeroe(screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
     
     #prueba nave enemiga
-    naveEnemiga = NaveEnemiga(screen, IMAGE_DIR, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 400))
-    colisionManager.add(naveEnemiga)
+    naveEnemiga = componentManager.createNaveEnemiga(screen,   'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 400))
     
     #bucle de ejecucion del juego
     bucleDeEjecucion()

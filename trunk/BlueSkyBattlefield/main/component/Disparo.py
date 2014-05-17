@@ -26,4 +26,5 @@ class Disparo(SpriteExtended):
         self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
             
     def collision(self):
+        self.posicionY = -10
         print 'disparo collision'
