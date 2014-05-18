@@ -14,18 +14,15 @@ class Disparo(SpriteExtended):
 
         
     def pintar(self, initPosicionX, initPosicionY):                
-        self.posicionX = initPosicionX
-        self.posicionY = initPosicionY
-        self.rect.y = self.posicionY
-        self.rect.x = self.posicionX
-        self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
-    
-    def update(self):
-        self.posicionY = self.posicionY -10
-        self.rect.y = self.posicionY
-        self.rect.x = self.posicionX
-        self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
+        if self.borrar == False:
+            self.posicionX = initPosicionX
+            self.posicionY = initPosicionY
+            self.rect.y = self.posicionY
+            self.rect.x = self.posicionX
             
-    def collision(self):
-        self.posicionY = -10
+            self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
+        
+            
+    def colision(self):
+        self.borrar = True
         print 'disparo collision'
