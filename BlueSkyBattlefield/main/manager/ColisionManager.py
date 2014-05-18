@@ -4,31 +4,26 @@ Created on 03/05/2014
 @author: Fernando
 '''
 import pygame
-from main.component.Disparo import Disparo
-from main.component.NaveHeroe import NaveHeroe
-from main.component.DisparoHeroe import DisparoHeroe
+
 from main.component import DisparoEnemigo
+from main.component.Disparo import Disparo
+from main.component.DisparoHeroe import DisparoHeroe
 from main.component.NaveEnemiga import NaveEnemiga
+from main.component.NaveHeroe import NaveHeroe
 
 
 class ColisionManager(object):
 
     def __init__(self):
-        self.arrayObjetos = []
+        self.objetos = pygame.sprite.Group()
     
     # anade un objeto al array de colisiones para ser mantenido por el ColissionManager
     def add(self, item):
-            self.arrayObjetos.append(item)
+            self.objetos.add(item)
     
     # elimina un objeto al array de colisiones para ser mantenido por el ColissionManager    
     def remove(self, objeto):
-        if self.arrayObjetos:
-            indexToRemove = -1
-            for i in range(len(self.arrayObjetos) - 1):
-                if self.arrayObjetos[i] == objeto:
-                    indexToRemove = i
-            if indexToRemove >= 0:
-                self.arrayObjetos.pop(indexToRemove)
+        self.objetos.remove(objeto)
     
     #comprueba si se ha producido colision entre dos sprites       
     def checkCollision(self, sprite1, sprite2):
@@ -53,11 +48,11 @@ class ColisionManager(object):
     
     # recorre el array de colisiones comprobando que los objetos colisionen, si colisionan lo notifica
     def execute(self):
-        if self.arrayObjetos:  
-            for i in xrange(len(self.arrayObjetos) - 1):
-                objeto1 = self.arrayObjetos[i]
-                for i in xrange(len(self.arrayObjetos) - 1):
-                    objeto2 = self.arrayObjetos[i]
+        if self.objetos.sprites():  
+            for i in xrange(len(self.objetos.sprites()) - 1):
+                objeto1 = self.objetos.sprites()[i]
+                for i in xrange(len(self.objetos.sprites()) - 1):
+                    objeto2 = self.objetos.sprites()[i]
                     if objeto1 != objeto2:                        
                         colision = self.checkCollision(objeto1, objeto2) 
                         if colision:

@@ -7,13 +7,15 @@ import sys
 
 import pygame
 
-
-from pygame.locals import*
-from main.component.NaveHeroe import *
 from main.component.NaveEnemiga import *
-from main.util.ImageUtil import ImageUtils
+from main.component.NaveHeroe import *
 from main.manager.ColisionManager import ColisionManager
 from main.manager.ComponentManager import ComponentManager
+from main.util.ImageUtil import ImageUtils
+
+
+from pygame.locals import*
+from main.manager.LandScapeManager import LandScapeManager
 
 
 # Constantes
@@ -35,10 +37,15 @@ def bucleDeEjecucion():
             if evento.type == QUIT:
                 salir = True        
         
-        #set images position
-        screen.blit(background_image, (0, 0))
+        #componentManager.landScapeManager.scrollLandScape()
+        componentManager.landScapeManager.update()
+        
         naveHeroe.pintar()
-        naveEnemiga.pintar()
+        
+        if naveEnemiga:
+            naveEnemiga.pintar()
+        else:
+            print 'no se esta pintando la nave enemiga'
              
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
@@ -52,6 +59,8 @@ def bucleDeEjecucion():
         naveHeroe.updateDisparos()
         
         componentManager.colisionManager.execute()
+        
+        componentManager.checkRemove()
         #=======================================================================
         # #detectar colisiones
         # for i in range(10):
@@ -68,6 +77,7 @@ def bucleDeEjecucion():
         
         #establecer velocidad de reloj y actualizar el display
         reloj.tick(30)
+        pygame.display.update()
         pygame.display.flip()
         
     pygame.quit()
@@ -81,16 +91,21 @@ if __name__ == '__main__':
     pygame.display.set_caption("Blue Sky Battlefield")
     pygame.mouse.set_visible(False)
     #load images
-    background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')[0]
-
+    #background_image = ImageUtils.load_image(screen, IMAGE_DIR, 'stars_blue.png')[0]
+    
+    
     #managers
-    componentManager = ComponentManager()
-
+    componentManager = ComponentManager(screen)
+    
+    
+    #creacion del fondo
+    componentManager.landScapeManager.setLandScape(screen, IMAGE_DIR, 'stars_blue.png')
+    
     #creacion de objetos nave del protagonista
     naveHeroe = componentManager.createNaveHeroe(screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
     
     #prueba nave enemiga
-    naveEnemiga = componentManager.createNaveEnemiga(screen,   'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 400))
+    naveEnemiga = componentManager.createNaveEnemiga(screen,   'rd2.png', 'lasser.png', 25, 25, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 400))
     
     #bucle de ejecucion del juego
     bucleDeEjecucion()
