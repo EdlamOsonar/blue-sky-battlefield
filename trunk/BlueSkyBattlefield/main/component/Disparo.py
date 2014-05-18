@@ -1,7 +1,8 @@
 import pygame
 
-from main.util.ImageUtil import ImageUtils
 from main.component.SpriteExtended import SpriteExtended
+from main.util.ImageUtil import ImageUtils
+
 
 class Disparo(SpriteExtended):
     

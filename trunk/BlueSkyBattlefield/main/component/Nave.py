@@ -1,7 +1,8 @@
 import pygame
 
-from main.util.ImageUtil import ImageUtils
 from main.component.SpriteExtended import SpriteExtended
+from main.util.ImageUtil import ImageUtils
+
 
 class Nave(SpriteExtended):    
        
@@ -35,7 +36,8 @@ class Nave(SpriteExtended):
         self.vida = self.vida -1
     
     def pintar(self):
-        self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
+        if self.borrar == False:
+            self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
         
     def moverX(self, unidades):       
         nuevaPosicion = self.posicionX + unidades
@@ -45,6 +47,10 @@ class Nave(SpriteExtended):
 
     def moverY(self, unidades):
         self.posicionY = self.posicionY + unidades
+        
+    def removeComponent(self, elementoBorrar):
+        print 'borra'
+        
         
     
     

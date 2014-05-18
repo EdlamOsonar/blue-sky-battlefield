@@ -1,11 +1,11 @@
 from main.component.Nave import Nave
 
 
-
 class NaveEnemiga(Nave):
       
+    
     def postConstructor(self):
-        self.arrayDisparos = []
+        self.disparos = []
         self.vida = 10
 
 
@@ -15,9 +15,8 @@ class NaveEnemiga(Nave):
     def colision(self):
         self.vida = self.vida - 1
         if self.vida <= 0:
-            self.posicionY = self.posicionY - 50
-            self.posicionY = self.posicionY -50
-            print 'Nave Enemiga destruida'
-            
-            
-        print 'vida de la nave enemiga ' + str(self.vida)
+            self.explotar()
+
+    def explotar(self):
+        print 'pintar explosion'
+        self.borrar = True
