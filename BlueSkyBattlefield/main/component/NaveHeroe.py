@@ -39,11 +39,13 @@ class NaveHeroe(Nave):
                        
             if(numeroDisparos >= 0):
                 disparosEliminar  = []
-                for i in range(numeroDisparos):
-                    disparo = self.disparos.sprites()[i]
+                for disparo in self.disparos.sprites():
                     disparo.update() 
                     #comprobar si los disparos ya no estan en pantalla para eliminarlos
-                    if disparo.posicionY <= 0:            
+                    if disparo.posicionY < 0:
+                        disparo.borrar = True            
+                    
+                    if disparo.borrar:
                         disparosEliminar.append(disparo)
                 
                 #eliminar disparos

@@ -37,7 +37,7 @@ def bucleDeEjecucion():
             if evento.type == QUIT:
                 salir = True        
         
-        #componentManager.landScapeManager.scrollLandScape()
+        componentManager.landScapeManager.scrollLandScape()
         componentManager.landScapeManager.update()
         
         naveHeroe.pintar()

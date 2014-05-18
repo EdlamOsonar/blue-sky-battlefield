@@ -26,7 +26,7 @@ class LandScapeManager():
         if(self.y > self.h):
             self.y = 0
         else:
-            self.y += 5
+            self.y += 2
         
         
     def update(self):
