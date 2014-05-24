@@ -96,10 +96,8 @@ if __name__ == '__main__':
     
     #managers
     componentManager = ComponentManager(screen)
-    
-    
-    #creacion del fondo
-    componentManager.landScapeManager.setLandScape(screen, IMAGE_DIR, 'stars_blue.png')
+   
+   
     
     #creacion de objetos nave del protagonista
     naveHeroe = componentManager.createNaveHeroe(screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
