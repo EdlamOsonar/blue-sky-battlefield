@@ -8,8 +8,6 @@ import os, pygame
 from pygame.locals import *
 from main.util.ImageUtil import ImageUtils
 
-# game constants
-SCREENRECT = Rect(0, 0, 640, 480)
 
 def imgcolorkey(image, colorkey):
     if colorkey is not None:
@@ -39,15 +37,17 @@ class SpriteSheet:
 
 class Arena:
     speed = 2
-    def __init__(self):
-        w = SCREENRECT.width
-        h = SCREENRECT.height
+    def __init__(self, screen):
+        w = pygame.display.get_surface().get_width()
+        h = pygame.display.get_surface().get_height()
         self.tileside = self.oceantile.get_height()
         self.counter = 0
         self.ocean = pygame.Surface((w, h + self.tileside)).convert()
         for x in range(w/self.tileside):
             for y in range(h/self.tileside + 1):
                 self.ocean.blit(self.oceantile, (x*self.tileside, y*self.tileside))
+                
+                
     def increment(self):
         self.counter = (self.counter - self.speed) % self.tileside
     def decrement(self):
@@ -68,7 +68,7 @@ class LandScapeManager():
         spritesheet = SpriteSheet('1945.bmp')
         
         # initialize our starting sprites
-        self.arena = Arena()
+        self.arena = Arena(screen)
         
                 
     
@@ -84,4 +84,4 @@ class LandScapeManager():
         
         
     def update(self):
-        self.screen.blit(self.arena.ocean, (0, 0), (0, self.arena.counter, SCREENRECT.width, SCREENRECT.height))
+        self.screen.blit(self.arena.ocean, (0, 0), (0, self.arena.counter, pygame.display.get_surface().get_width(),pygame.display.get_surface().get_height()))
