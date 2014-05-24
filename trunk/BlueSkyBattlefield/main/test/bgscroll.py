@@ -68,7 +68,10 @@ def main():
     # (do this before the classes are used, after screen setup)
     spritesheet = SpriteSheet('1945.bmp')
 
-    Arena.oceantile = spritesheet.imgat((268, 367, 32, 32))
+    #test
+    image =load_image('stars_blue.png')
+
+    Arena.oceantile =  spritesheet.imgat((268, 367, 32, 32))
 
     # decorate the game window
     pygame.display.set_caption('scriptedfun.com - press UP, DOWN, ESC, or Q')
