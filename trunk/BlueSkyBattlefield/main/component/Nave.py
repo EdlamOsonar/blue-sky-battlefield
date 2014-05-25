@@ -19,6 +19,14 @@ class Nave(SpriteExtended):
         
         self.spriteSheet = SpriteSheet(SPRITE_SHEET)
         self.image, self.rect = ImageUtils.load_image(imagen, None, True )
+        self.explosion = self.spriteSheet.imgsat([(70, 169, 32, 32),
+                                           (103, 169, 32, 32),
+                                           (136, 169, 32, 32),
+                                           (169, 169, 32, 32),
+                                           (202, 169, 32, 32),                                           
+                                           (235, 169, 32, 32)],
+                                          -1)
+        
         self.file_name_image_disparo = imagen_disparo
         
         self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
@@ -50,7 +58,10 @@ class Nave(SpriteExtended):
             self.rect.x = self.posicionX
 
     def moverY(self, unidades):
-        self.posicionY = self.posicionY + unidades
+        nuevaPosicion = self.posicionY + unidades
+        if nuevaPosicion > -2 and nuevaPosicion < self.screen.get_height() - 21:
+            self.posicionY = self.posicionY + unidades
+            self.rect.y = self.posicionY
         
     def removeComponent(self, elementoBorrar):
         print 'borra'

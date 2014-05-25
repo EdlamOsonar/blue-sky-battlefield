@@ -23,6 +23,7 @@ from main.manager.LandScapeManager import LandScapeManager
 SCREEN_WIDTH = 640
 SCREEN_HEIGHT = 480
 IMAGE_DIR = "../resources/imx"
+SOUNDS_DIR = "../resources/sounds"
 
 
 #Ejecucion del juego--------------------------------------------------------------------------
@@ -50,6 +51,10 @@ def bucleDeEjecucion():
             levelManager.naveHeroe.moverIzquierda()
         if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
             levelManager.naveHeroe.moverDerecha()
+        if(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
+            levelManager.naveHeroe.moverArriba()
+        if(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
+            levelManager.naveHeroe.moverAbajo()
         if(keys[pygame.K_SPACE]):
             levelManager.naveHeroe.disparar()
         
@@ -82,6 +87,7 @@ def bucleDeEjecucion():
 # Inicializacion(punto de entrada de la ejecucion del programa)---------------------------------------------------------------------
 if __name__ == '__main__':
     pygame.init()
+    pygame.mixer.init()
     
     #screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), FULLSCREEN, 32)
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -94,7 +100,10 @@ if __name__ == '__main__':
     #managers
     componentManager = ComponentManager(screen)
     
+    
     levelManager = LevelManager(screen, componentManager)
+    
+    levelManager.initLevel()
     
     #bucle de ejecucion del juego
     bucleDeEjecucion()

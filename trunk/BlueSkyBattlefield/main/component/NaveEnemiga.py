@@ -20,3 +20,6 @@ class NaveEnemiga(Nave):
     def explotar(self):
         print 'pintar explosion'
         self.borrar = True
+        for item in self.explosion:
+            self.screen.blit(item, (self.posicionX, self.posicionY))
+            
