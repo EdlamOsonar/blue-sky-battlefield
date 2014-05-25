@@ -27,7 +27,7 @@ class NaveHeroe(Nave):
         
     def disparar(self):
         if(len(self.disparos.sprites()) < NUMERO_DISPAROS):
-            disparo = DisparoHeroe(self.screen, self.file_name_image_disparo, WIDTH_LASER, HEIGHT_LASER)
+            disparo = DisparoHeroe(self.screen, self.file_name_image_disparo, self.spriteSheet, WIDTH_LASER, HEIGHT_LASER)
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             self.disparos.add(disparo)                    

@@ -2,14 +2,18 @@ import pygame
 
 from main.component.SpriteExtended import SpriteExtended
 from main.util.ImageUtil import ImageUtils
-
+from main.util.ImageUtil import SpriteSheet
+from main.util.ImageUtil import SPRITE_SHEET
 
 class Disparo(SpriteExtended):
     
-    def __init__(self, screen, file_image_name, widthScale, heightScale):
+    def __init__(self, screen, file_image_name, spriteSheet, widthScale, heightScale):
         self.screen = screen
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = ImageUtils.load_image(file_image_name)
+        self.spriteSheet = SpriteSheet(SPRITE_SHEET)
+        self.image = spriteSheet.imgat((48, 176, 9, 20), -1)
+        self.rect = self.image.get_rect()
+        #self.image, self.rect = ImageUtils.load_image(file_image_name)
         self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
 
         

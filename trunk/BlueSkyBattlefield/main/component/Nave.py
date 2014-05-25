@@ -2,9 +2,12 @@ import pygame
 
 from main.component.SpriteExtended import SpriteExtended
 from main.util.ImageUtil import ImageUtils
-
+from main.util.ImageUtil import SpriteSheet
+from main.util.ImageUtil import SPRITE_SHEET
 
 class Nave(SpriteExtended):    
+    
+    
        
     #screen y filename son la pantalla y la ruta del archivo que le pasamos al metodo loadImage
     #widthScale, heightScale son el reescalado del sprite , posicionX, posicionY son el lugar de la pantalla
@@ -12,7 +15,9 @@ class Nave(SpriteExtended):
     def __init__(self, screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY):        
         self.screen = screen
                 
-        pygame.sprite.Sprite.__init__(self)
+        pygame.sprite.Sprite.__init__(self)       
+        
+        self.spriteSheet = SpriteSheet(SPRITE_SHEET)
         self.image, self.rect = ImageUtils.load_image(imagen, None, True )
         self.file_name_image_disparo = imagen_disparo
         

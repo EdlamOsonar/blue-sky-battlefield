@@ -10,7 +10,8 @@ from main.component.NaveHeroe import NaveHeroe
 from main.component.NaveEnemiga import NaveEnemiga
 from main.manager.ColisionManager import ColisionManager
 from main.manager.LandScapeManager import LandScapeManager
-
+from main.util.ImageUtil import SpriteSheet
+from main.util.ImageUtil import SPRITE_SHEET
 
 class ComponentManager():
     '''
@@ -19,6 +20,7 @@ class ComponentManager():
 
 
     def __init__(self, screen):
+        self.spriteSheet = SpriteSheet(SPRITE_SHEET)
         self.colisionManager = ColisionManager()
         self.landScapeManager = LandScapeManager(screen)        
         self.components = pygame.sprite.Group()
@@ -35,6 +37,7 @@ class ComponentManager():
         
     def createNaveHeroe(self, screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY):
         naveHeroe = NaveHeroe(screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY)
+        naveHeroe.spriteSheet = self.spriteSheet
         naveHeroe.setColisionManager(self.colisionManager)
         self.colisionManager.add(naveHeroe)
         self.components.add(naveHeroe)
