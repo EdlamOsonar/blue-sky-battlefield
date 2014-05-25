@@ -6,10 +6,36 @@ Created on 27/04/2014
 import os
 
 import pygame
+from pygame.locals import Rect
 
 IMAGE_PATH = "../resources/imx"
 
+SPRITE_SHEET = '1945.bmp'
+
+#Clase que se encarga de procesar el fichero con todos los sprites,
+#recuperar uno o meterlos todos en un array.
+class SpriteSheet:
+    
+    def __init__(self, filename):
+        self.sheet = ImageUtils.load_image(filename)[0]
+    
+    
+    def imgat(self, rect, colorkey = None):
+        rect = Rect(rect)
+        image = pygame.Surface(rect.size).convert()
+        image.blit(self.sheet, (0, 0), rect)
+        return ImageUtils.imgcolorkey(image, colorkey)
+    
+    
+    def imgsat(self, rects, colorkey = None):
+        imgs = []
+        for rect in rects:
+            imgs.append(self.imgat(rect, colorkey))
+        return imgs
+
 class ImageUtils():
+    
+    
     
     @staticmethod
     def imgcolorkey(image, colorkey):

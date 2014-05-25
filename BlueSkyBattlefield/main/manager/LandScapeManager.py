@@ -5,31 +5,9 @@ Created on 03/05/2014
 '''
 
 import pygame
-from pygame.locals import Rect
-from main.util.ImageUtil import ImageUtils
+from main.util.ImageUtil import SpriteSheet
+from main.util.ImageUtil import SPRITE_SHEET
 
-SPRITE_SHEET = '1945.bmp'
-
-#Clase que se encarga de procesar el fichero con todos los sprites,
-#recuperar uno o meterlos todos en un array.
-class SpriteSheet:
-    
-    def __init__(self, filename):
-        self.sheet = ImageUtils.load_image(filename)[0]
-    
-    
-    def imgat(self, rect, colorkey = None):
-        rect = Rect(rect)
-        image = pygame.Surface(rect.size).convert()
-        image.blit(self.sheet, (0, 0), rect)
-        return ImageUtils.imgcolorkey(image, colorkey)
-    
-    
-    def imgsat(self, rects, colorkey = None):
-        imgs = []
-        for rect in rects:
-            imgs.append(self.imgat(rect, colorkey))
-        return imgs
 
 #Clase que representa el fondo del juego e implementa su movimiento
 class LandScape:
@@ -59,8 +37,10 @@ class LandScapeManager():
         self.screen = screen
         # cargar imagenes del sprite de imagenes y asignarlas a una clase sprite
         # (hacerlo antes de que las clases sean usadas y antes de iniciar la pantalla)
-        spritesheet = SpriteSheet(SPRITE_SHEET)     
-        LandScape.oceantile =  spritesheet.imgat((268, 367, 32, 32))
+        #self.spriteSheet = SpriteSheet(SPRITE_SHEET)             
+        #LandScape.oceantile =  self.spriteSheet.imgat((268, 367, 32, 32))
+        self.spriteSheet = SpriteSheet('stars_brown.png')             
+        LandScape.oceantile =  self.spriteSheet.imgat((0, 0, 32, 32))
         
         # inicializar los spritesd
         self.landScape = LandScape(screen)
