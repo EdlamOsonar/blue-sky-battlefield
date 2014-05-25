@@ -20,12 +20,12 @@ class ComponentManager():
 
     def __init__(self, screen):
         self.colisionManager = ColisionManager()
-        self.landScapeManager = LandScapeManager(screen)
+        self.landScapeManager = LandScapeManager(screen)        
         self.components = pygame.sprite.Group()
         
     
     def createDisparo(self, screen, imageFileName, width, height, arrayDisparos):
-            disparo = Disparo(screen, "../resources/imx", imageFileName, width, height)
+            disparo = Disparo(screen, imageFileName, width, height)
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             arrayDisparos.append(disparo)                    
@@ -34,14 +34,14 @@ class ComponentManager():
             return disparo
         
     def createNaveHeroe(self, screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY):
-        naveHeroe = NaveHeroe(screen, "../resources/imx", imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY)
+        naveHeroe = NaveHeroe(screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY)
         naveHeroe.setColisionManager(self.colisionManager)
         self.colisionManager.add(naveHeroe)
         self.components.add(naveHeroe)
         return naveHeroe
     
     def createNaveEnemiga(self, screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY):
-        naveEnemiga = NaveEnemiga(screen, "../resources/imx", imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY)
+        naveEnemiga = NaveEnemiga(screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY)
         self.colisionManager.add(naveEnemiga)
         self.components.add(naveEnemiga)
         return naveEnemiga

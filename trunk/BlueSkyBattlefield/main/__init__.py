@@ -11,6 +11,7 @@ from main.component.NaveEnemiga import *
 from main.component.NaveHeroe import *
 from main.manager.ColisionManager import ColisionManager
 from main.manager.ComponentManager import ComponentManager
+from main.manager.LevelManager import LevelManager
 from main.util.ImageUtil import ImageUtils
 
 
@@ -40,23 +41,19 @@ def bucleDeEjecucion():
         componentManager.landScapeManager.scrollLandScape()
         componentManager.landScapeManager.update()
         
-        naveHeroe.pintar()
-        
-        if naveEnemiga:
-            naveEnemiga.pintar()
-        else:
-            print 'no se esta pintando la nave enemiga'
+        levelManager.execute()
+
              
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
         if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
-            naveHeroe.moverIzquierda()
+            levelManager.naveHeroe.moverIzquierda()
         if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
-            naveHeroe.moverDerecha()
+            levelManager.naveHeroe.moverDerecha()
         if(keys[pygame.K_SPACE]):
-            naveHeroe.disparar()
+            levelManager.naveHeroe.disparar()
         
-        naveHeroe.updateDisparos()
+        levelManager.naveHeroe.updateDisparos()
         
         componentManager.colisionManager.execute()
         
@@ -96,14 +93,8 @@ if __name__ == '__main__':
     
     #managers
     componentManager = ComponentManager(screen)
-   
-   
     
-    #creacion de objetos nave del protagonista
-    naveHeroe = componentManager.createNaveHeroe(screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 65))
-    
-    #prueba nave enemiga
-    naveEnemiga = componentManager.createNaveEnemiga(screen,   'rd2.png', 'lasser.png', 25, 25, ((SCREEN_WIDTH / 2) - 20), (SCREEN_HEIGHT - 400))
+    levelManager = LevelManager(screen, componentManager)
     
     #bucle de ejecucion del juego
     bucleDeEjecucion()

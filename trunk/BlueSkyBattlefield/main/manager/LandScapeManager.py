@@ -4,38 +4,35 @@ Created on 03/05/2014
 @author: Fernando
 '''
 
-import os, pygame
-from pygame.locals import *
+import pygame
+from pygame.locals import Rect
 from main.util.ImageUtil import ImageUtils
 
+SPRITE_SHEET = '1945.bmp'
 
-def imgcolorkey(image, colorkey):
-    if colorkey is not None:
-        if colorkey is -1:
-            colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, RLEACCEL)
-    return image
-
-def load_image(filename, colorkey = None):
-    filename = os.path.join('../resources/imx/', filename)
-    image = pygame.image.load(filename).convert()
-    return imgcolorkey(image, colorkey)
-
+#Clase que se encarga de procesar el fichero con todos los sprites,
+#recuperar uno o meterlos todos en un array.
 class SpriteSheet:
+    
     def __init__(self, filename):
-        self.sheet = load_image(filename)
+        self.sheet = ImageUtils.load_image(filename)[0]
+    
+    
     def imgat(self, rect, colorkey = None):
         rect = Rect(rect)
         image = pygame.Surface(rect.size).convert()
         image.blit(self.sheet, (0, 0), rect)
-        return imgcolorkey(image, colorkey)
+        return ImageUtils.imgcolorkey(image, colorkey)
+    
+    
     def imgsat(self, rects, colorkey = None):
         imgs = []
         for rect in rects:
             imgs.append(self.imgat(rect, colorkey))
         return imgs
 
-class Arena:
+#Clase que representa el fondo del juego e implementa su movimiento
+class LandScape:
     speed = 2
     def __init__(self, screen):
         w = pygame.display.get_surface().get_width()
@@ -48,40 +45,34 @@ class Arena:
                 self.ocean.blit(self.oceantile, (x*self.tileside, y*self.tileside))
                 
                 
-    def increment(self):
+    def scrollUp(self):
         self.counter = (self.counter - self.speed) % self.tileside
-    def decrement(self):
+    def scrollDown(self):
         self.counter = (self.counter + self.speed) % self.tileside
         
+#Manager para inicializar el fondo y su movimiento
 class LandScapeManager():
     
     speed = 2
      
     def __init__(self, screen):   
         self.screen = screen
-        # load images, assign to sprite classes
-        # (do this before the classes are used, after screen setup)
-        spritesheet = SpriteSheet('1945.bmp')     
-        Arena.oceantile =  spritesheet.imgat((268, 367, 32, 32))
-        # load images, assign to sprite classes
-        # (do this before the classes are used, after screen setup)
-        spritesheet = SpriteSheet('1945.bmp')
+        # cargar imagenes del sprite de imagenes y asignarlas a una clase sprite
+        # (hacerlo antes de que las clases sean usadas y antes de iniciar la pantalla)
+        spritesheet = SpriteSheet(SPRITE_SHEET)     
+        LandScape.oceantile =  spritesheet.imgat((268, 367, 32, 32))
         
-        # initialize our starting sprites
-        self.arena = Arena(screen)
+        # inicializar los spritesd
+        self.landScape = LandScape(screen)
         
-                
-    
-    def increment(self):
-        self.counter = (self.counter - self.speed) % self.tileside
-    
-    def decrement(self):
-        self.counter = (self.counter + self.speed) % self.tileside
-
-        
+                        
+    #realiza el movimiento automatico del scroll
     def scrollLandScape(self):
-            self.arena.increment()
+            self.landScape.scrollUp()
         
-        
+    #llamar en cada iteracion del bucle de ejecucion del juego para que repinte el landscape        
     def update(self):
-        self.screen.blit(self.arena.ocean, (0, 0), (0, self.arena.counter, pygame.display.get_surface().get_width(),pygame.display.get_surface().get_height()))
+        self.screen.blit(self.landScape.ocean, (0, 0),
+                          (0, self.landScape.counter,
+                          pygame.display.get_surface().get_width(),
+                          pygame.display.get_surface().get_height()))
