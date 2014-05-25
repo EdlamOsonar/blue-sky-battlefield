@@ -10,6 +10,7 @@ from main.component.NaveHeroe import NaveHeroe
 from main.component.NaveEnemiga import NaveEnemiga
 from main.manager.ColisionManager import ColisionManager
 from main.manager.LandScapeManager import LandScapeManager
+from main.manager.SoundManager import SoundManager
 from main.util.ImageUtil import SpriteSheet
 from main.util.ImageUtil import SPRITE_SHEET
 
@@ -22,7 +23,8 @@ class ComponentManager():
     def __init__(self, screen):
         self.spriteSheet = SpriteSheet(SPRITE_SHEET)
         self.colisionManager = ColisionManager()
-        self.landScapeManager = LandScapeManager(screen)        
+        self.landScapeManager = LandScapeManager(screen)
+        self.soundManager = SoundManager()        
         self.components = pygame.sprite.Group()
         
     

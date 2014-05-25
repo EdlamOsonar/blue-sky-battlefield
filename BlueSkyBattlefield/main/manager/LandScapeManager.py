@@ -39,7 +39,7 @@ class LandScapeManager():
         # (hacerlo antes de que las clases sean usadas y antes de iniciar la pantalla)
         #self.spriteSheet = SpriteSheet(SPRITE_SHEET)             
         #LandScape.oceantile =  self.spriteSheet.imgat((268, 367, 32, 32))
-        self.spriteSheet = SpriteSheet('stars_brown.png')             
+        self.spriteSheet = SpriteSheet('stars.png')             
         LandScape.oceantile =  self.spriteSheet.imgat((0, 0, 32, 32))
         
         # inicializar los spritesd

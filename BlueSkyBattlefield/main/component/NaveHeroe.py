@@ -25,6 +25,12 @@ class NaveHeroe(Nave):
     def moverDerecha(self):
         self.moverX(self.velocidadMovimiento)
         
+    def moverArriba(self):
+        self.moverY(-self.velocidadMovimiento)
+        
+    def moverAbajo(self):
+        self.moverY(self.velocidadMovimiento)
+        
     def disparar(self):
         if(len(self.disparos.sprites()) < NUMERO_DISPAROS):
             disparo = DisparoHeroe(self.screen, self.file_name_image_disparo, self.spriteSheet, WIDTH_LASER, HEIGHT_LASER)

@@ -31,7 +31,8 @@ class LevelManager():
     def initLevel(self):
         self.vidas = 10           
         self.level += 1
-
+        initSound = self.componentManager.soundManager.loadSound('dp_tron_panic.mp3')        
+        initSound.play()
 
         
     def execute(self):
