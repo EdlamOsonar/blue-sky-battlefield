@@ -6,7 +6,7 @@ class NaveEnemiga(Nave):
     
     def postConstructor(self):
         self.disparos = []
-        self.vida = 10
+        self.vida = 2
 
 
     def atacar(self):

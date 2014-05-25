@@ -9,12 +9,11 @@ class Nave(SpriteExtended):
     #screen y filename son la pantalla y la ruta del archivo que le pasamos al metodo loadImage
     #widthScale, heightScale son el reescalado del sprite , posicionX, posicionY son el lugar de la pantalla
     #en que queremos que se pinte el sprite
-    def __init__(self, screen, image_dir, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY):        
+    def __init__(self, screen, imagen, imagen_disparo, widthScale, heightScale, posicionX, posicionY):        
         self.screen = screen
-        self.image_dir = image_dir
-        
+                
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = ImageUtils.load_image(screen, image_dir, imagen, True)
+        self.image, self.rect = ImageUtils.load_image(imagen, None, True )
         self.file_name_image_disparo = imagen_disparo
         
         self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))

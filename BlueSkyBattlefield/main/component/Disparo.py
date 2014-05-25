@@ -6,10 +6,10 @@ from main.util.ImageUtil import ImageUtils
 
 class Disparo(SpriteExtended):
     
-    def __init__(self, screen, image_dir, file_image_name, widthScale, heightScale):
+    def __init__(self, screen, file_image_name, widthScale, heightScale):
         self.screen = screen
         pygame.sprite.Sprite.__init__(self)
-        self.image, self.rect = ImageUtils.load_image(screen, image_dir, file_image_name, True)
+        self.image, self.rect = ImageUtils.load_image(file_image_name)
         self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
 
         
