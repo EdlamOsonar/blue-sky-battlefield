@@ -1,7 +1,6 @@
 import pygame
 
 from main.component.SpriteExtended import SpriteExtended
-from main.util.ImageUtil import ImageUtils
 from main.util.ImageUtil import SpriteSheet
 from main.util.ImageUtil import SPRITE_SHEET
 
