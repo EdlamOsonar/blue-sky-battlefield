@@ -48,11 +48,13 @@ class ColisionManager(object):
     
     # recorre el array de colisiones comprobando que los objetos colisionen, si colisionan lo notifica
     def execute(self):
-        if self.objetos.sprites():  
-            for i in xrange(len(self.objetos.sprites()) - 1):
-                objeto1 = self.objetos.sprites()[i]
-                for i in xrange(len(self.objetos.sprites()) - 1):
-                    objeto2 = self.objetos.sprites()[i]
+        componentes = self.objetos.sprites()
+        if componentes:  
+            componentesLen = len(componentes) - 1
+            for index1 in xrange(componentesLen):
+                objeto1 = self.objetos.sprites()[index1]
+                for index2 in xrange(componentesLen):
+                    objeto2 = self.objetos.sprites()[index2]
                     if objeto1 != objeto2:                        
                         colision = self.checkCollision(objeto1, objeto2) 
                         if colision:
