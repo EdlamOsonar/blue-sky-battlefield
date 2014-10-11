@@ -2,7 +2,8 @@ import pygame
 
 from main.component.DisparoHeroe import DisparoHeroe
 from main.component.Nave import Nave
-
+from main.util.SoundUtil import SoundUtil
+ 
 
 WIDTH_LASER = 3
 HEIGHT_LASER = 5
@@ -15,7 +16,9 @@ class NaveHeroe(Nave):
     def postConstructor(self):       
         #crear aray de disparos
         self.disparos = pygame.sprite.Group()
-    
+        self.sonido_lasser = SoundUtil.loadSound(self, 'lasser_short.ogg')
+        self.sonido_lasser.set_volume(0.5)
+            
     def setColisionManager(self, colisionManager):
         self.colisionManager = colisionManager
     
@@ -37,7 +40,8 @@ class NaveHeroe(Nave):
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             self.disparos.add(disparo)                    
-            self.colisionManager.add(disparo)
+            self.colisionManager.add(disparo)            
+            self.sonido_lasser.play()
             
     def updateDisparos(self):        
         if self.disparos.sprites():            

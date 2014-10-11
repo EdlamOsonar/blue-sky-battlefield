@@ -5,11 +5,9 @@ Created on 25/05/2014
 '''
 import pygame
 import random
-from ComponentManager import ComponentManager
+from main.util.SoundUtil import SoundUtil
 
-class LevelManager():
-    
-
+class LevelManager():  
     
     def __init__(self, screen, componentManager):
         'componente encargado de gestionar las fases del juego, los enemigos que se pintan, la vida del heroe, el numero de nivel, la puntucacion, etc'
@@ -25,16 +23,14 @@ class LevelManager():
         self.screenWidth = pygame.display.get_surface().get_width()
         self.screenHeight = pygame.display.get_surface().get_height()
         self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
-        
-        
     
     def initLevel(self):
         self.vidas = 10           
         self.level += 1
-        initSound = self.componentManager.soundManager.loadSound('dp_tron_panic.mp3')        
-        initSound.play()
+        sound_level = SoundUtil.loadSound(self, 'cosmic-air-way-arrange.ogg')
+        sound_level.set_volume(0.5)     
+        sound_level.play()
 
-        
     def execute(self):
         self.naveHeroe.pintar() 
         
@@ -49,14 +45,10 @@ class LevelManager():
         
         #prueba, si no hay enemigos anado uno
         if len(self.enemies) <= 0:
-            self.createEnemies()
-                
+            self.createEnemies()                
     
     def createEnemies(self):
         posicionX = random.randint(1, self.screenWidth -21)        
         enemie = self.componentManager.createNaveEnemiga(self.screen,   'rd2.png', 'lasser.png', 25, 25, posicionX, (self.screenHeight - 400))
         #  enemie = self.componentManager.createNaveEnemiga(self.screen,   'rd2.png', 'lasser.png', 25, 25, ((self.screenWidth / 2) - 20), (self.screenHeight - 400))
         self.enemies.add(enemie)
-        
-        
-          
