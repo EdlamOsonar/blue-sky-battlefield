@@ -23,6 +23,7 @@ class LevelManager():
         self.screenWidth = pygame.display.get_surface().get_width()
         self.screenHeight = pygame.display.get_surface().get_height()
         self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
+        self.score = 0
     
     def initLevel(self):
         self.vidas = 10           
@@ -39,13 +40,18 @@ class LevelManager():
         for item in self.enemies:
             if item.borrar == True:
                 enemigosParaBorrar.append(item)
+                self.score +=125
             else:
                 item.pintar()
         self.enemies.remove(enemigosParaBorrar)
         
         #prueba, si no hay enemigos anado uno
         if len(self.enemies) <= 0:
-            self.createEnemies()                
+            self.createEnemies()     
+
+        self.font = pygame.font.Font('../resources/fonts/font.ttf', 8)
+        scoreRender = self.font.render("Score%06d" % self.score, 1, (255, 0, 0))        
+        self.screen.blit(scoreRender, (self.screenWidth - 100, 12))           
     
     def createEnemies(self):
         posicionX = random.randint(1, self.screenWidth -21)        
