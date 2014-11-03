@@ -47,6 +47,8 @@ def bucleDeEjecucion():
 
         
         levelManager.execute()
+
+        componentManager.colisionManager.execute()
             
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
@@ -66,7 +68,6 @@ def bucleDeEjecucion():
         reloj.tick(30)
         pygame.display.update()
         pygame.display.flip()
-        componentManager.colisionManager.execute()
              
     pygame.quit()
 
