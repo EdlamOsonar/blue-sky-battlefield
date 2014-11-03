@@ -69,3 +69,6 @@ class NaveHeroe(Nave):
     
     def colision(self):
         print 'colision de la nave del heroe'
+        
+    def toString(self):
+        return 'NaveHeroe'

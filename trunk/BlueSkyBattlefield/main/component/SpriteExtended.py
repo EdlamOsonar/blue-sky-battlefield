@@ -8,8 +8,11 @@ import pygame
 class SpriteExtended(pygame.sprite.Sprite):
      
     borrar = False
-   
+    velocidadJuego = 1
 
     
     def colision(self):
+        pass
+    
+    def toString(self):
         pass

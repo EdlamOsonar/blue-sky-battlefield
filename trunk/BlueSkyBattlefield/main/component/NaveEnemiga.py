@@ -8,7 +8,6 @@ class NaveEnemiga(Nave):
         self.disparos = []
         self.vida = 2
 
-
     def atacar(self):
         print 'Nave enemiga ataca'
         
@@ -22,4 +21,14 @@ class NaveEnemiga(Nave):
         self.borrar = True
         for item in self.explosion:
             self.screen.blit(item, (self.posicionX, self.posicionY))
+            
+    def ejecutarPatronMovimiento(self):
+        self.posicionY = self.posicionY + (self.velocidad * 6)
+        self.rect.y = self.posicionY
+        if(self.posicionY > 200 and self.posicionY < 300):
+            self.moverX(10)
+            
+            
+    def toString(self):
+        return  'NaveEnemiga'
             
