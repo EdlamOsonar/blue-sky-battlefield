@@ -39,12 +39,15 @@ def bucleDeEjecucion():
             if evento.type == QUIT:
                 salir = True        
         
+        componentManager.checkRemove()
         componentManager.landScapeManager.scrollLandScape()
         componentManager.landScapeManager.update()
         
-        levelManager.execute()
+      
 
-             
+        
+        levelManager.execute()
+            
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
         if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
@@ -56,32 +59,15 @@ def bucleDeEjecucion():
         if(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
             levelManager.naveHeroe.moverAbajo()
         if(keys[pygame.K_SPACE]):
-            levelManager.naveHeroe.disparar()
-        
-        levelManager.naveHeroe.updateDisparos()
-        
-        componentManager.colisionManager.execute()
-        
-        componentManager.checkRemove()
-        #=======================================================================
-        # #detectar colisiones
-        # for i in range(10):
-        #     if(len(naveHeroe.arrayDisparos) >= i + 1):
-        #         disparo = naveHeroe.arrayDisparos[i]
-        #         #disparo.rect.y = 250
-        #         print(' disparo y ' + str(disparo.rect.y) + ' disparo x ' + str(disparo.rect.x))
-        #         print(' nave enemiga y ' + str(naveEnemiga.rect.y) + ' nave enemiga x ' + str(naveEnemiga.rect.x))
-        #         impactoAlEnemigo = naveEnemiga.rect.colliderect(disparo.rect)                
-        #         if impactoAlEnemigo:                    
-        #             naveEnemiga.impacto()
-        #=======================================================================
-                    #disparo.destruir()
+            levelManager.naveHeroe.disparar()     
+    
         
         #establecer velocidad de reloj y actualizar el display
         reloj.tick(30)
         pygame.display.update()
         pygame.display.flip()
-        
+        componentManager.colisionManager.execute()
+             
     pygame.quit()
 
 # Inicializacion(punto de entrada de la ejecucion del programa)---------------------------------------------------------------------
