@@ -18,21 +18,22 @@ class NaveHeroe(Nave):
         self.disparos = pygame.sprite.Group()
         self.sonido_lasser = SoundUtil.loadSound(self, 'lasser_short.ogg')
         self.sonido_lasser.set_volume(0.5)
+        self.vida = 1
             
     def setColisionManager(self, colisionManager):
         self.colisionManager = colisionManager
     
     def moverIzquierda(self):
-        self.moverX(-self.velocidadMovimiento)
+        self.moverX(-self.velocidadMovimiento * 10)
     
     def moverDerecha(self):
-        self.moverX(self.velocidadMovimiento)
+        self.moverX(self.velocidadMovimiento * 10)
         
     def moverArriba(self):
-        self.moverY(-self.velocidadMovimiento)
+        self.moverY(-self.velocidadMovimiento * 10)
         
     def moverAbajo(self):
-        self.moverY(self.velocidadMovimiento)
+        self.moverY(self.velocidadMovimiento * 10)
         
     def disparar(self):
         if(len(self.disparos.sprites()) < NUMERO_DISPAROS):
@@ -69,6 +70,8 @@ class NaveHeroe(Nave):
     
     def colision(self):
         print 'colision de la nave del heroe'
+        self.vida = self.vida - 1
+        print 'Vida nave heroe = ' + str(self.vida)
         
     def toString(self):
         return 'NaveHeroe'

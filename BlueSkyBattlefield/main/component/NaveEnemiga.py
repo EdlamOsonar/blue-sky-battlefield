@@ -1,4 +1,5 @@
 from main.component.Nave import Nave
+from main.util.Constants import RUTINA_RECTO
 
 
 class NaveEnemiga(Nave):
@@ -12,8 +13,8 @@ class NaveEnemiga(Nave):
         print 'Nave enemiga ataca'
         
     def colision(self):
-        self.vida = self.vida - 1
-        if self.vida <= 0:
+        self.vidas = self.vidas - 1
+        if self.vidas <= 0:
             self.explotar()
 
     def explotar(self):
@@ -23,10 +24,15 @@ class NaveEnemiga(Nave):
             self.screen.blit(item, (self.posicionX, self.posicionY))
             
     def ejecutarPatronMovimiento(self):
-        self.posicionY = self.posicionY + (self.velocidad * 6)
-        self.rect.y = self.posicionY
-        if(self.posicionY > 200 and self.posicionY < 300):
-            self.moverX(10)
+        
+        if RUTINA_RECTO == self.rutina_movimiento:
+            self.posicionY = self.posicionY + (self.velocidad * 6)
+            self.rect.y = self.posicionY
+        else:
+            self.posicionY = self.posicionY + (self.velocidad * 6)
+            self.rect.y = self.posicionY
+            if(self.posicionY > 200 and self.posicionY < 300):
+                self.moverX(10)
             
             
     def toString(self):

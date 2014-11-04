@@ -43,9 +43,6 @@ def bucleDeEjecucion():
         componentManager.landScapeManager.scrollLandScape()
         componentManager.landScapeManager.update()
         
-      
-
-        
         levelManager.execute()
 
         componentManager.colisionManager.execute()
@@ -53,15 +50,15 @@ def bucleDeEjecucion():
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
         if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
-            levelManager.naveHeroe.moverIzquierda()
+            levelManager.getNaveHeroe().moverIzquierda()
         if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
-            levelManager.naveHeroe.moverDerecha()
+            levelManager.getNaveHeroe().moverDerecha()
         if(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
-            levelManager.naveHeroe.moverArriba()
+            levelManager.getNaveHeroe().moverArriba()
         if(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
-            levelManager.naveHeroe.moverAbajo()
+            levelManager.getNaveHeroe().moverAbajo()
         if(keys[pygame.K_SPACE]):
-            levelManager.naveHeroe.disparar()     
+            levelManager.getNaveHeroe().disparar()     
     
         
         #establecer velocidad de reloj y actualizar el display
@@ -86,11 +83,7 @@ if __name__ == '__main__':
     
     #managers
     componentManager = ComponentManager(screen)
-    
-    
-    levelManager = LevelManager(screen, componentManager)
-    
-    levelManager.initLevel()
+    levelManager = LevelManager(screen, componentManager)    
     
     #bucle de ejecucion del juego
     bucleDeEjecucion()
