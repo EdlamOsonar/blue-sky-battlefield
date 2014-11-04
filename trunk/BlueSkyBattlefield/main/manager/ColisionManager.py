@@ -58,7 +58,6 @@ class ColisionManager(object):
                     if indexNaveEnemiga < len(navesEnemigas):
                         naveEnemiga = navesEnemigas[indexNaveEnemiga]
                         if  pygame.sprite.collide_rect(naveEnemiga,naveHeroe):
-                            print 'colision -> ' + naveHeroe.toString() + ' ' + naveEnemiga.toString()
                             naveHeroe.colision()
                             naveEnemiga.colision()
                             
