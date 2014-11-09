@@ -1,12 +1,10 @@
-VIDAS = 10
-
 import pygame
 class LevelState():
 
     
     
 
-    def resetAtributosGlobales(self):
+    def resetAtributosGlobales(self, vidas):
         
         #group de enemigos    
         self.enemies = pygame.sprite.Group()
@@ -14,9 +12,7 @@ class LevelState():
         #inicializacion de atributos de juego
         self.volumen_musica = 0.5
         self.level_number = 1
-        self.vidas = VIDAS
-        self.score = 0
-        self.incremento_score = 125
+        self.vidas = vidas
         self.velocidadJuego = 1
         
         #creacion de la nave del heroe
@@ -26,10 +22,7 @@ class LevelState():
         
     def getEnemies(self):
         return self.enemies
-    
-    def getScore(self):
-        return self.score
-    
+
     def getVidas(self):
         return self.vidas
 

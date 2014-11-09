@@ -37,28 +37,12 @@ def bucleDeEjecucion():
     while salir != True:
         for evento in pygame.event.get():
             if evento.type == QUIT:
-                salir = True        
-        
-        componentManager.checkRemove()
+                salir = True
         componentManager.landScapeManager.scrollLandScape()
-        componentManager.landScapeManager.update()
-        
+        componentManager.landScapeManager.update()        
         levelManager.execute()
-
         componentManager.colisionManager.execute()
-            
-        #movimiento de la nave del heroe
-        keys=pygame.key.get_pressed()   
-        if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
-            levelManager.getNaveHeroe().moverIzquierda()
-        if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
-            levelManager.getNaveHeroe().moverDerecha()
-        if(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
-            levelManager.getNaveHeroe().moverArriba()
-        if(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
-            levelManager.getNaveHeroe().moverAbajo()
-        if(keys[pygame.K_SPACE]):
-            levelManager.getNaveHeroe().disparar()     
+        componentManager.checkRemove()        
     
         
         #establecer velocidad de reloj y actualizar el display

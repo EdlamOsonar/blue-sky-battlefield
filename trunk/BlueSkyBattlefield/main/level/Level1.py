@@ -13,19 +13,19 @@ class Level1(LevelState):
     '''
 
 
-    def __init__(self, screen, componentManager):
+    def __init__(self, screen, componentManager, vidas):
         '''
         Constructor
         '''
-        
         self.screen = screen
         self.componentManager = componentManager
         self.screenWidth = pygame.display.get_surface().get_width()
         self.screenHeight = pygame.display.get_surface().get_height()
         
-        self.resetAtributosGlobales()
-        self.resetLevelAtributes()
+        self.resetAtributosGlobales(vidas)
         
+        
+       
     def resetLevelAtributes(self):
         #sonidos del juego
         self.sound_level = SoundUtil.loadSound(self, 'cosmic-air-way-arrange.ogg')
@@ -37,7 +37,8 @@ class Level1(LevelState):
         ###############################codigo de prueba de creacion de enemigos##########################################
         #prueba, si no hay enemigos anado uno
         if len(self.enemies) <= 0:
-            self.componentManager.createEnemies(self.enemies, self.velocidadJuego, self.vidas)     
+            self.componentManager.createEnemies(self.enemies, self.velocidadJuego, self.vidas)
+            #self.componentManager.rutinaEnemigosEnParalelo(self.enemies, 1,  'r2.png', 'lasser.png', 25, 25)     
         
         self.naveHeroe.pintar() 
         
@@ -49,7 +50,6 @@ class Level1(LevelState):
             
             if item.borrar == True:
                 enemigosParaBorrar.append(item)
-                self.score += self.incremento_score
             else:
                 item.pintar()
                 item.ejecutarPatronMovimiento()

@@ -15,4 +15,7 @@ class DisparoHeroe(Disparo):
         self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
         
         
+    def colision(self):
+        self.borrar = True
+        print 'disparo heroe collision'
     
