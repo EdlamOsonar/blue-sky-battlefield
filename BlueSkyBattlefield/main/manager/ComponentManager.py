@@ -68,7 +68,7 @@ class ComponentManager():
             
     def createEnemies(self, enemies, velocidadJuego, vidas):
         posicionX = random.randint(1, pygame.display.get_surface().get_width() -21)        
-        enemie = self.createNaveEnemiga(self.screen,   'rd2.png', 'lasser.png', 25, 25, posicionX, (pygame.display.get_surface().get_height() - 400), RUTINA_RECTO)
+        enemie = self.createNaveEnemiga(self.screen,   'rd2.png', 'lasser.png', 25, 25, posicionX, 10, RUTINA_RECTO)
         #  enemie = self.componentManager.createNaveEnemiga(self.screen,   'rd2.png', 'lasser.png', 25, 25, ((self.screenWidth / 2) - 20), (self.screenHeight - 400), RUTINA_RECTO)
         enemie.velocidad = velocidadJuego
         enemie.vidas = vidas
@@ -76,6 +76,10 @@ class ComponentManager():
         
     #Crea una rutina de dos enemigos que avanzan en paralelo hacia abajo
     #desde cada extremo de la pantalla    
-    def rutinaEnemigosEnParalelo(self, imagen, imagen_disparo, widthScale, heightScale):
-        ComponentManager.createNaveEnemiga(self, self.screen, imagen, imagen_disparo, widthScale, heightScale, 10, RUTINA_RECTO)       
-        ComponentManager.createNaveEnemiga(self, self.screen, imagen, imagen_disparo, widthScale, heightScale, pygame.display.get_surface().get_width() - 10, RUTINA_RECTO)
+    def rutinaEnemigosEnParalelo(self, enemies, vidas, imagen, imagen_disparo, widthScale, heightScale):
+        enemie1 = ComponentManager.createNaveEnemiga(self, self.screen, imagen, imagen_disparo, widthScale, heightScale, 50, 10,  RUTINA_RECTO)
+        enemie1.vidas = vidas
+        enemies.add(enemie1)        
+        enemie2 = ComponentManager.createNaveEnemiga(self, self.screen, imagen, imagen_disparo, widthScale, heightScale, pygame.display.get_surface().get_width() - 50, 10, RUTINA_RECTO)
+        enemie2.vida = vidas
+        enemies.add(enemie2)

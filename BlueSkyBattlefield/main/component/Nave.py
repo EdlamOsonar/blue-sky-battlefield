@@ -43,9 +43,18 @@ class Nave(SpriteExtended):
 
     def postConstrucor(self):
         pass
-    
-    def collision(self):
-        self.vida = self.vida -1
+
+    def colision(self):
+        self.vidas = self.vidas - 1
+        if self.vidas <= 0:
+            self.explotar()
+
+    def explotar(self):
+        print 'pintar explosion'
+        self.borrar = True
+        for item in self.explosion:
+            self.screen.blit(item, (self.posicionX, self.posicionY))    
+
     
     def pintar(self):
         if self.borrar == False:
@@ -62,10 +71,5 @@ class Nave(SpriteExtended):
         if nuevaPosicion > -2 and nuevaPosicion < self.screen.get_height() - 21:
             self.posicionY = self.posicionY + unidades
             self.rect.y = self.posicionY
-        
-    def removeComponent(self, elementoBorrar):
-        print 'borra'
-        
-        
     
     
