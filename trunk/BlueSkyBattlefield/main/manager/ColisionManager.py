@@ -58,8 +58,8 @@ class ColisionManager(object):
                     if indexNaveEnemiga < len(navesEnemigas):
                         naveEnemiga = navesEnemigas[indexNaveEnemiga]
                         if  pygame.sprite.collide_rect(naveEnemiga,naveHeroe):
-                            naveHeroe.colision()
-                            naveEnemiga.colision()
+                            naveHeroe.colision(naveEnemiga)
+                            naveEnemiga.colision(naveHeroe)
                             
         #colisiones disparos heroe
         for indexDisparoHeroe in xrange(len(disparosHeroe)):
@@ -69,8 +69,8 @@ class ColisionManager(object):
                     if indexNaveEnemiga < len(navesEnemigas):
                         naveEnemiga = navesEnemigas[indexNaveEnemiga]
                         if pygame.sprite.collide_rect(disparoHeroe, naveEnemiga):
-                            naveEnemiga.colision()
-                            disparoHeroe.colision()
+                            naveEnemiga.colision(disparoHeroe)
+                            disparoHeroe.colision(naveEnemiga)
                             
         #colisiones disparos enemigos
         for indexDisparoEnemigo in xrange(len(disparosEnemigo)):
@@ -80,6 +80,6 @@ class ColisionManager(object):
                     if indexNaveHeroe < len(navesHeroe):
                         naveHeroe = navesHeroe[indexNaveHeroe]
                         if pygame.sprite.collide_rect(disparoEnemigo, navesHeroe):
-                            naveHeroe.colision()
-                            disparoEnemigo.colision()
+                            naveHeroe.colision(disparoEnemigo)
+                            disparoEnemigo.colision(naveHeroe)
                         

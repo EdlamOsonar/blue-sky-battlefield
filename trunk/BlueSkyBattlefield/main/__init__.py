@@ -38,9 +38,13 @@ def bucleDeEjecucion():
         for evento in pygame.event.get():
             if evento.type == QUIT:
                 salir = True
-        componentManager.landScapeManager.scrollLandScape()
-        componentManager.landScapeManager.update()        
+        
+        if levelManager.inExecute:
+            componentManager.landScapeManager.scrollLandScape()
+        componentManager.landScapeManager.update()
+        
         levelManager.execute()
+        
         componentManager.colisionManager.execute()
         componentManager.checkRemove()        
     

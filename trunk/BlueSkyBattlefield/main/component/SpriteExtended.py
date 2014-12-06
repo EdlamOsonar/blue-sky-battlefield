@@ -11,7 +11,7 @@ class SpriteExtended(pygame.sprite.Sprite):
     velocidadJuego = 1
 
     
-    def colision(self):
+    def colision(self, objetoColision):
         pass
     
     def toString(self):

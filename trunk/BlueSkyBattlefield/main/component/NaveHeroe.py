@@ -39,7 +39,7 @@ class NaveHeroe(Nave):
         
     def disparar(self):
         if(len(self.disparos.sprites()) < NUMERO_DISPAROS):
-            disparo = DisparoHeroe(self.screen, self.file_name_image_disparo, self.spriteSheet, WIDTH_LASER, HEIGHT_LASER)
+            disparo = DisparoHeroe(self.screen, self.file_name_image_disparo, self.spriteSheet, WIDTH_LASER, HEIGHT_LASER, self)
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             self.disparos.add(disparo)                    
@@ -70,7 +70,7 @@ class NaveHeroe(Nave):
                         self.colisionManager.remove(disparo)
 
     
-    def colision(self):
+    def colision(self, objetoColision):
         print 'colision de la nave del heroe'
         self.vida = self.vida - 1
         print 'Vida nave heroe = ' + str(self.vida)
