@@ -6,7 +6,7 @@ from main.util.ImageUtil import SPRITE_SHEET
 
 class Disparo(SpriteExtended):
     
-    def __init__(self, screen, file_image_name, spriteSheet, widthScale, heightScale):
+    def __init__(self, screen, file_image_name, spriteSheet, widthScale, heightScale, parentObject):
         self.screen = screen
         pygame.sprite.Sprite.__init__(self)
         self.spriteSheet = SpriteSheet(SPRITE_SHEET)
@@ -14,7 +14,8 @@ class Disparo(SpriteExtended):
         self.rect = self.image.get_rect()
         #self.image, self.rect = ImageUtils.load_image(file_image_name)
         self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
-
+        #el parent object es quien realiza el disparo
+        self.parentObject = parentObject
         
     def pintar(self, initPosicionX, initPosicionY):                
         if self.borrar == False:
@@ -26,6 +27,6 @@ class Disparo(SpriteExtended):
             self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
         
             
-    def colision(self):
+    def colision(self, objetoColision):
         self.borrar = True
         print 'disparo padre collision'

@@ -45,10 +45,12 @@ class LandScapeManager():
         # inicializar los spritesd
         self.landScape = LandScape(screen)
         
-                        
+        self.update()
+                       
     #realiza el movimiento automatico del scroll
     def scrollLandScape(self):
             self.landScape.scrollUp()
+ 
         
     #llamar en cada iteracion del bucle de ejecucion del juego para que repinte el landscape        
     def update(self):

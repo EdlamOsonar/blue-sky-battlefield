@@ -29,6 +29,8 @@ class LevelManager():
         self.level = Level1(self.screen, self.componentManager, VIDAS)
         self.playGameOverSound = True
         self.initialScreen = True
+        #variable que indica si hay algun nivel en ejecucion
+        self.inExecute = False
         
     def getNaveHeroe(self):
         return self.level.naveHeroe
@@ -36,7 +38,7 @@ class LevelManager():
     def execute(self):
         #texto de las vidas
         self.font = pygame.font.Font('../resources/fonts/font.ttf', 8)
-        vidasRender = self.font.render("Vidas x " +  str(self.level.vidas), 1, (255, 0, 0))
+        vidasRender = self.font.render("Life x " +  str(self.level.vidas), 1, (255, 0, 0))
         self.screen.blit(vidasRender, (10, 12))   
         
         
@@ -90,10 +92,13 @@ class LevelManager():
             self.level.resetAtributosGlobales(VIDAS)
             self.level.resetLevelAtributes()
             self.initialScreen = False
-            self.playGameOverSound = True   
+            self.playGameOverSound = True
+            self.inExecute = True
     
     def gameOver(self):
-        #game over
+            #game over
+            self.inExecute = False
+            
             #texto game over
             gameOverRender = self.font.render("GAME OVER", 1, (255,0,0))
             self.screen.blit(gameOverRender, ((self.screenWidth/2) - 20, (self.screenHeight/ 2)- 10))

@@ -1,4 +1,5 @@
 from main.component.Disparo import Disparo
+from main.component.NaveEnemiga import NaveEnemiga
 
 
 class DisparoHeroe(Disparo):
@@ -15,7 +16,9 @@ class DisparoHeroe(Disparo):
         self.screen.blit(self.scaledImage, (self.posicionX, self.posicionY))
         
         
-    def colision(self):
+    def colision(self, objetoColision):
         self.borrar = True
-        print 'disparo heroe collision'
+        if type(objetoColision) is NaveEnemiga:
+            self.parentObject.score = self.parentObject.score + self.parentObject.incremento_score
+        print 'disparo heroe collision. Puntuacion -> ' + str(self.parentObject.score)
     

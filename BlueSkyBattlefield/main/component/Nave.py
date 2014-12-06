@@ -44,7 +44,7 @@ class Nave(SpriteExtended):
     def postConstrucor(self):
         pass
 
-    def colision(self):
+    def colision(self, objetoColision):
         self.vidas = self.vidas - 1
         if self.vidas <= 0:
             self.explotar()

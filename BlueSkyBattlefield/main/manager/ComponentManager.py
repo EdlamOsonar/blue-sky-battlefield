@@ -31,8 +31,8 @@ class ComponentManager():
         self.components = pygame.sprite.Group()
         
     
-    def createDisparo(self, screen, imageFileName, width, height, arrayDisparos):
-            disparo = Disparo(screen, imageFileName, width, height)
+    def createDisparo(self, screen, imageFileName, width, height, arrayDisparos, parentObject):
+            disparo = Disparo(screen, imageFileName, width, height, parentObject)
             disparo.posicionX = self.posicionX + self.width / 2
             disparo.posicionY = self.posicionY
             arrayDisparos.append(disparo)                    
