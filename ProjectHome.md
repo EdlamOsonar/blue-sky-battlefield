@@ -1,0 +1,1 @@
+Jueog en python con pydev, de naves, se trata de un proyecto simple para aprender el lenguaje de una forma divertida.
