@@ -9,8 +9,10 @@ from main.util.Constants import RUTINA_RECTO
 from main.util.SoundUtil import SoundUtil
 from main.manager.ComponentManager import ComponentManager
 from main.level.Level1 import Level1
+from main.component.ScoreBar import ScoreBar
 
-VIDAS = 1
+VIDAS = 2
+VIDA_HEROE = 6 
     
 class LevelManager():  
 
@@ -38,7 +40,7 @@ class LevelManager():
     def execute(self):
         #texto de las vidas
         self.font = pygame.font.Font('../resources/fonts/font.ttf', 8)
-        vidasRender = self.font.render("Life x " +  str(self.level.vidas), 1, (255, 0, 0))
+        vidasRender = self.font.render("Lives x " +  str(self.level.vidas), 1, (255, 0, 0))
         self.screen.blit(vidasRender, (10, 12))   
         
         
@@ -47,13 +49,17 @@ class LevelManager():
         scoreRender = self.font.render("Score%06d" % self.level.naveHeroe.score, 1, (255, 0, 0))
         self.screen.blit(scoreRender, (self.screenWidth - 100, 12))   
         
+        #score bar
+        if self.inExecute:
+            self.scoreBar = ScoreBar(self.screen, self.level.naveHeroe.vida)
+        
         #mover nave heroe
         self.moverNaveHeroe()
         
         #control de la vida del heroe
-        if (self.level.naveHeroe.vida < 0):
+        if (self.level.naveHeroe.vida <= 0):
             self.level.vidas = self.level.vidas -1
-            self.level.naveHeroe.vida = VIDAS
+            self.level.naveHeroe.vida = VIDA_HEROE
                                   
                       
         #game over y reinicio
@@ -76,7 +82,7 @@ class LevelManager():
             self.getNaveHeroe().moverArriba()
         if(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
             self.getNaveHeroe().moverAbajo()
-        if(keys[pygame.K_SPACE]):
+        if(keys[pygame.K_SPACE] and self.inExecute):
             self.getNaveHeroe().disparar()  
             
     def initScreen(self):

@@ -18,7 +18,7 @@ class NaveHeroe(Nave):
         self.disparos = pygame.sprite.Group()
         self.sonido_lasser = SoundUtil.loadSound(self, 'lasser_short.ogg')
         self.sonido_lasser.set_volume(0.5)
-        self.vida = 1
+        self.vida = 6
         self.score = 0
         self.incremento_score = 125
             

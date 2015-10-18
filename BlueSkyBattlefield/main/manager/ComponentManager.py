@@ -14,6 +14,7 @@ from main.manager.SoundManager import SoundManager
 from main.util.ImageUtil import SpriteSheet
 from main.util.ImageUtil import SPRITE_SHEET
 from main.util.Constants import RUTINA_RECTO
+from main.component.ScoreBar import ScoreBar
 
 
 class ComponentManager():
@@ -73,6 +74,7 @@ class ComponentManager():
         enemie.velocidad = velocidadJuego
         enemie.vidas = vidas
         enemies.add(enemie)
+       
         
     #Crea una rutina de dos enemigos que avanzan en paralelo hacia abajo
     #desde cada extremo de la pantalla    
