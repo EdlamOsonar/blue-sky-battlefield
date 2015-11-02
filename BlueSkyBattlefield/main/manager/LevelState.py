@@ -16,7 +16,8 @@ class LevelState():
         self.velocidadJuego = 1
         
         #creacion de la nave del heroe
-        self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
+        self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
+        #self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
         self.naveHeroe.vidas = self.vidas 
         self.naveHeroe.velocidadMovimiento = self.velocidadJuego
         

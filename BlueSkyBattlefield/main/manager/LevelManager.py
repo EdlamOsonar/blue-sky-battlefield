@@ -76,14 +76,16 @@ class LevelManager():
         keys=pygame.key.get_pressed()   
         if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
             self.getNaveHeroe().moverIzquierda()
-        if(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
+        elif(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
             self.getNaveHeroe().moverDerecha()
-        if(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
+        elif(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
             self.getNaveHeroe().moverArriba()
-        if(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
+        elif(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
             self.getNaveHeroe().moverAbajo()
-        if(keys[pygame.K_SPACE] and self.inExecute):
-            self.getNaveHeroe().disparar()  
+        elif(keys[pygame.K_SPACE] and self.inExecute):
+            self.getNaveHeroe().disparar() 
+        else:
+            self.getNaveHeroe().no_mover() 
             
     def initScreen(self):
         #texto de la pantalla de inicio

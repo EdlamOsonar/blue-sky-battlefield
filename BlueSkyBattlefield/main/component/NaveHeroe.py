@@ -36,6 +36,7 @@ class NaveHeroe(Nave):
         
     def moverAbajo(self):
         self.moverY(self.velocidadMovimiento * 10)
+       
         
     def disparar(self):
         if(len(self.disparos.sprites()) < NUMERO_DISPAROS):

@@ -11,6 +11,7 @@ from pygame.locals import Rect
 IMAGE_PATH = "../resources/imx"
 
 SPRITE_SHEET = '1945.bmp'
+SPRITE_SPACESSHIP = 'spaceship_sprites.png'
 
 #Clase que se encarga de procesar el fichero con todos los sprites,
 #recuperar uno o meterlos todos en un array.
