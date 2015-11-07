@@ -41,7 +41,7 @@ def bucleDeEjecucion():
         
         if levelManager.inExecute:
             componentManager.landScapeManager.scrollLandScape()
-        componentManager.landScapeManager.update()
+        componentManager.landScapeManager.update(levelManager.inExecute)
         
         levelManager.execute()
         

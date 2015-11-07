@@ -20,13 +20,13 @@ class SpriteSheet:
     def __init__(self, filename):
         self.sheet = ImageUtils.load_image(filename)[0]
     
+       
     
     def imgat(self, rect, colorkey = None):
         rect = Rect(rect)
         image = pygame.Surface(rect.size).convert()
         image.blit(self.sheet, (0, 0), rect)
-        return ImageUtils.imgcolorkey(image, colorkey)
-    
+        return ImageUtils.imgcolorkey(image, colorkey)  
     
     def imgsat(self, rects, colorkey = None):
         imgs = []
@@ -60,6 +60,9 @@ class ImageUtils():
             
         return ImageUtils.imgcolorkey(image, colorkey), image.get_rect() 
 
+    @staticmethod
+    def load_image_transparent(filename):
+        return pygame.image.load(IMAGE_PATH + '/' + filename).convert_alpha()
     
     #===========================================================================
     # @staticmethod

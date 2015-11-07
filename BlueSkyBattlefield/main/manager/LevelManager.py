@@ -74,19 +74,22 @@ class LevelManager():
     def moverNaveHeroe(self):
         #movimiento de la nave del heroe
         keys=pygame.key.get_pressed()   
-        if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
-            self.getNaveHeroe().moverIzquierda()
-        elif(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
-            self.getNaveHeroe().moverDerecha()
-        elif(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
+        
+        if(keys[pygame.K_w]) or (keys[pygame.K_UP]):#move up
             self.getNaveHeroe().moverArriba()
-        elif(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
-            self.getNaveHeroe().moverAbajo()
-        elif(keys[pygame.K_SPACE] and self.inExecute):
-            self.getNaveHeroe().disparar() 
         else:
-            self.getNaveHeroe().no_mover() 
-            
+            if(keys[pygame.K_SPACE] and self.inExecute):
+                self.getNaveHeroe().disparar() 
+                
+            if (keys[pygame.K_a])or (keys[pygame.K_LEFT]):#move left
+                self.getNaveHeroe().moverIzquierda()
+            elif(keys[pygame.K_d]) or (keys[pygame.K_RIGHT]):#move right
+                self.getNaveHeroe().moverDerecha()        
+            elif(keys[pygame.K_s]) or (keys[pygame.K_DOWN]):#move down
+                self.getNaveHeroe().moverAbajo()    
+            else:
+                self.getNaveHeroe().no_mover() 
+
     def initScreen(self):
         #texto de la pantalla de inicio
         blueSkyBattlefieldRender = self.font.render("BLUE SKY BATTLEFIELD", 1, (255,0,0))
