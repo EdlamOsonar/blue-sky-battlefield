@@ -43,11 +43,13 @@ jobs:
           python -m pygbag --build --app_name "Blue Sky Battlefield" .
 
       - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-pages-artifact@v3
         with:
           path: BlueSkyBattlefield/build/web
 
   deploy:
+    if: github.ref == 'refs/heads/master'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
