@@ -72,9 +72,9 @@ class NaveHeroe(Nave):
 
     
     def colision(self, objetoColision):
-        print 'colision de la nave del heroe'
+        print('colision de la nave del heroe')
         self.vida = self.vida - 1
-        print 'Vida nave heroe = ' + str(self.vida)
+        print('Vida nave heroe = ' + str(self.vida))
         
     def toString(self):
         return 'NaveHeroe'

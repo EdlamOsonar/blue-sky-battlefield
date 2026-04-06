@@ -29,4 +29,4 @@ class Disparo(SpriteExtended):
             
     def colision(self, objetoColision):
         self.borrar = True
-        print 'disparo padre collision'
+        print('disparo padre collision')

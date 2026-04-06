@@ -8,7 +8,7 @@ import os
 import pygame
 from pygame.locals import Rect
 
-IMAGE_PATH = "../resources/imx"
+IMAGE_PATH = os.path.join('resources', 'imx')
 
 SPRITE_SHEET = '1945.bmp'
 SPRITE_SPACESSHIP = 'spaceship_sprites.png'
@@ -41,7 +41,7 @@ class ImageUtils():
     @staticmethod
     def imgcolorkey(image, colorkey):
         if colorkey is not None:
-            if colorkey is -1:
+            if colorkey == -1:
                 colorkey = image.get_at((0, 0))
                 #establecer el nivel de transparencia de la imagen
                 image.set_colorkey(colorkey, pygame.constants.RLEACCEL)

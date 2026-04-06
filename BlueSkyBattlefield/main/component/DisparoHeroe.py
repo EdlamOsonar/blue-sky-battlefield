@@ -20,5 +20,5 @@ class DisparoHeroe(Disparo):
         self.borrar = True
         if type(objetoColision) is NaveEnemiga:
             self.parentObject.score = self.parentObject.score + self.parentObject.incremento_score
-        print 'disparo heroe collision. Puntuacion -> ' + str(self.parentObject.score)
+        print('disparo heroe collision. Puntuacion -> ' + str(self.parentObject.score))
     
