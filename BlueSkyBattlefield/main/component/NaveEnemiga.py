@@ -11,7 +11,7 @@ class NaveEnemiga(Nave):
         self.vida = 1
 
     def atacar(self):
-        print 'Nave enemiga ataca'
+        print('Nave enemiga ataca')
             
     def ejecutarPatronMovimiento(self):
         

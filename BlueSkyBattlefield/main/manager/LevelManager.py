@@ -3,6 +3,7 @@ Created on 25/05/2014
 
 @author: Fernando
 '''
+import os
 import pygame
 import random
 from main.util.Constants import RUTINA_RECTO
@@ -10,6 +11,8 @@ from main.util.SoundUtil import SoundUtil
 from main.manager.ComponentManager import ComponentManager
 from main.level.Level1 import Level1
 from main.component.ScoreBar import ScoreBar
+
+FONT_PATH = os.path.join('resources', 'fonts', 'font.ttf')
 
 VIDAS = 2
 VIDA_HEROE = 6 
@@ -39,13 +42,13 @@ class LevelManager():
             
     def execute(self):
         #texto de las vidas
-        self.font = pygame.font.Font('../resources/fonts/font.ttf', 8)
+        self.font = pygame.font.Font(FONT_PATH, 8)
         vidasRender = self.font.render("Lives x " +  str(self.level.vidas), 1, (255, 0, 0))
         self.screen.blit(vidasRender, (10, 12))   
         
         
         #texto del score
-        self.font = pygame.font.Font('../resources/fonts/font.ttf', 8)
+        self.font = pygame.font.Font(FONT_PATH, 8)
         scoreRender = self.font.render("Score%06d" % self.level.naveHeroe.score, 1, (255, 0, 0))
         self.screen.blit(scoreRender, (self.screenWidth - 100, 12))   
         

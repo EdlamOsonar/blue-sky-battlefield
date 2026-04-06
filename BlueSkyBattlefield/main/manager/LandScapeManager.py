@@ -23,8 +23,8 @@ class LandScape:
         
         self.tileside = self.scroll_tile.height
         self.scroll = pygame.Surface((w, h)).convert()
-        for x in range(w/self.tileside):
-            for y in range(h/self.tileside + 1):
+        for x in range(w//self.tileside):
+            for y in range(h//self.tileside + 1):
                 self.scroll.blit(self.scroll_tile, (x*self.tileside, y*self.tileside))
                 
                 
@@ -35,7 +35,7 @@ class LandScape:
         
     def scrollDown(self):
         self.counter = (self.counter + self.speed) % self.tileside
-        print  str(self.counter)
+        print(str(self.counter))
         
 #Manager para inicializar el fondo y su movimiento
 class LandScapeManager():

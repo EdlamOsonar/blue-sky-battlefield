@@ -38,7 +38,7 @@ class Nave(SpriteExtended):
         
         #self.scaledImage = pygame.transform.scale(self.image, (widthScale, heightScale))
         self.scaled_image = []
-        for index in xrange(len(space_ship)):
+        for index in range(len(space_ship)):
             self.scaled_image.append(pygame.transform.scale(space_ship[index], (widthScale, heightScale)))
     
         #posiciones en pantalla y tamano del objeto
@@ -61,7 +61,7 @@ class Nave(SpriteExtended):
             self.explotar()
 
     def explotar(self):
-        print 'pintar explosion'
+        print('pintar explosion')
         self.borrar = True
         for item in self.explosion:
             self.screen.blit(item, (self.posicionX, self.posicionY))    
