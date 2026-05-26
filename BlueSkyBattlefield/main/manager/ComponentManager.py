@@ -33,9 +33,9 @@ class ComponentManager():
         
     
     def createDisparo(self, screen, imageFileName, width, height, arrayDisparos, parentObject):
-            disparo = Disparo(screen, imageFileName, width, height, parentObject)
-            disparo.posicionX = self.posicionX + self.width / 2
-            disparo.posicionY = self.posicionY
+            disparo = Disparo(screen, imageFileName, self.spriteSheet, width, height, parentObject)
+            disparo.posicionX = parentObject.posicionX + parentObject.width / 2
+            disparo.posicionY = parentObject.posicionY
             arrayDisparos.append(disparo)                    
             self.colisionManager.add(disparo)
             self.components.add(disparo)
