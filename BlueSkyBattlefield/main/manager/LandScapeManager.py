@@ -5,14 +5,16 @@ Created on 03/05/2014
 '''
 
 import pygame
+from typing import Any
 from main.util.ImageUtil import SpriteSheet, ImageUtils
 from main.util.ImageUtil import SPRITE_SHEET
 
 #Clase que representa el fondo del juego e implementa su movimiento
 class LandScape:
     speed = 2
-    
-    
+    background_image: "Any"
+    scroll_tile: "Any"
+
     def __init__(self, screen):
         w = pygame.display.get_surface().get_width()
         h = pygame.display.get_surface().get_height()

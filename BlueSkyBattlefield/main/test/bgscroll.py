@@ -9,7 +9,8 @@
 # Common Public License
 
 import os, pygame
-from pygame.locals import *
+from typing import Any
+from pygame.locals import QUIT, KEYDOWN, K_ESCAPE, K_q, K_UP, K_DOWN, Rect, RLEACCEL
 
 # game constants
 SCREENRECT = Rect(0, 0, 640, 480)
@@ -42,6 +43,8 @@ class SpriteSheet:
 
 class Arena:
     speed = 2
+    oceantile: "Any"
+
     def __init__(self):
         w = SCREENRECT.width
         h = SCREENRECT.height

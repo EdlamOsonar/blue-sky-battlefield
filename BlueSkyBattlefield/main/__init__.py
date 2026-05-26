@@ -15,7 +15,7 @@ from main.manager.LevelManager import LevelManager
 from main.util.ImageUtil import ImageUtils
 
 
-from pygame.locals import*
+from pygame.locals import QUIT
 from main.manager.LandScapeManager import LandScapeManager
 
 

@@ -1,26 +1,31 @@
 import pygame
-class LevelState():
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from main.manager.ComponentManager import ComponentManager
 
-    
-    
+class LevelState():
+    screen: object
+    componentManager: "ComponentManager"
+    screenWidth: int
+    screenHeight: int
 
     def resetAtributosGlobales(self, vidas):
-        
-        #group de enemigos    
+
+        #group de enemigos
         self.enemies = pygame.sprite.Group()
-        
+
         #inicializacion de atributos de juego
         self.volumen_musica = 0.5
         self.level_number = 1
         self.vidas = vidas
         self.velocidadJuego = 1
-        
+
         #creacion de la nave del heroe
         self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
         #self.naveHeroe = self.componentManager.createNaveHeroe(self.screen, 'spaceShip_40.png', 'lasser.png', 25, 35, ((self.screenWidth / 2) - 20), (self.screenHeight - 65))
-        self.naveHeroe.vidas = self.vidas 
+        self.naveHeroe.vidas = self.vidas
         self.naveHeroe.velocidadMovimiento = self.velocidadJuego
-        
+
     def getEnemies(self):
         return self.enemies
 
@@ -29,9 +34,9 @@ class LevelState():
 
     def getLevelNumber(self):
         return self.level_number;
-    
+
     def getVolumenMusica(self):
-        return self.volumenMusica
-        
+        return self.volumen_musica
+
     def getVelocidadJuego(self):
         return self.velocidadJuego

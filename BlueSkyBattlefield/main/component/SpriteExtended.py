@@ -14,5 +14,5 @@ class SpriteExtended(pygame.sprite.Sprite):
     def colision(self, objetoColision):
         pass
     
-    def toString(self):
+    def toString(self) -> str | None:
         pass
